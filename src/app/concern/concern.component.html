@@ -1,0 +1,135 @@
+<div class="container mt-4">
+  <h2 class="mb-3 fs-5">Concerns</h2>
+
+  <button
+  type="button"
+  class="btn btn-outline-dark mb-3"
+  data-bs-toggle="modal"
+  data-bs-target="#addConcernModal"
+  style="border-radius: 0;font-size: 0.85rem;"
+>
+<i class="bi bi-plus-circle"></i>   Add Concerns
+</button>
+
+  <div *ngIf="loading" class="text-center my-4">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger my-3">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && concern.length">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Concern Name</th>
+          <th>Image</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let concernItem of concern; let i = index">
+          <td>{{ concernItem.id }}</td>
+          <td>{{ concernItem.concernName }}</td>
+          <td>
+            <img [src]="concernItem.imgPath" alt="{{ concernItem.concernName }}" class="img-thumbnail" style="max-width: 100px;" />
+          </td>
+          <td>
+            <button class="btn btn-outline-dark btn-sm me-2" style="border-radius: 0;">Delete</button>
+            <button class="btn btn-outline-dark btn-sm" style="border-radius: 0;">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="!loading && !concern.length" class="alert alert-warning text-center">
+    No concerns available.
+  </div>
+
+ 
+</div>
+<div
+  class="modal fade"
+  id="addConcernModal"
+  tabindex="-1"
+  aria-labelledby="addConcernModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content"  style="border-radius: 0;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addConcernModalLabel">Add Concerns</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form #concernForm="ngForm">
+          <div *ngFor="let item of newConcerns; let i = index">
+            <div class="mb-3">
+              <label for="concernName{{ i }}" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="concernName{{ i }}"
+                [(ngModel)]="item.name"
+                name="name{{ i }}"
+                required
+                style="border-radius: 0;"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="concernFile{{ i }}" class="form-label">File</label>
+              <input
+                type="file"
+                class="form-control"
+                id="concernFile{{ i }}"
+                (change)="onFileChange($event, i)"
+                style="border-radius: 0;"
+              />
+            </div>
+            <button
+              type="button"
+              class="btn btn-danger mb-3"
+              (click)="removeConcern(i)"
+              style="border-radius: 0;"
+            >
+              Remove
+            </button>
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="addConcern()"  style="border-radius: 0;">
+            Add More
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          style="border-radius: 0;"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="saveConcerns()"
+          [disabled]="!concernForm.form.valid"
+          style="border-radius: 0;"
+
+        >
+          Save Concerns
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

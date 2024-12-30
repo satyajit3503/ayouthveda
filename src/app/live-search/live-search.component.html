@@ -1,0 +1,31 @@
+<div class="search relative">
+    <div class="searchInputs">
+      <input
+        type="text"
+        [placeholder]="placeholder"
+        [(ngModel)]="wordEntered"
+        (input)="handleFilter($event)"
+        class="border rounded text-xs py-2 px-2"
+      />
+    </div>
+  
+    <div *ngIf="selectedValues.length > 0" class="selectedValues mt-2">
+      <div *ngFor="let value of selectedValues; let i = index" class="bg-blue-500 text-white text-xs line-clamp-1 rounded-full py-1 px-3 mr-2 mb-2 inline-flex items-center">
+        {{ value.title }}
+        <span class="ml-2 cursor-pointer" (click)="handleRemove(i)">
+          &times;
+        </span>
+      </div>
+    </div>
+  
+    <div *ngIf="filteredData.length > 0" class="dataResult">
+      <div
+        *ngFor="let value of filteredData.slice(0, 15); let key = index"
+        (click)="handleSelect(value)"
+        class="cursor-pointer text-xs hover:bg-gray-200 p-2"
+      >
+        {{ value.title }}
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,138 @@
+<div class="container mt-4">
+  <h2 class="mb-3 fs-5">Collections</h2>
+  <button
+  type="button"
+  class="btn btn-outline-dark mb-3"
+  data-bs-toggle="modal"
+  data-bs-target="#addCollectionModal"
+  style="border-radius: 0;font-size: 0.85rem;"
+>
+<i class="bi bi-plus-circle"></i> Add Collections
+</button>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="text-center my-4">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="alert alert-danger my-3">
+    {{ error }}
+  </div>
+
+  <!-- Collections Table -->
+  <div *ngIf="!loading && collections.length">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Collection Name</th>
+          <th>Image</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let collectionItem of collections; let i = index">
+          <td>{{ collectionItem.id }}</td>
+          <td>{{ collectionItem.collectionName }}</td>
+          <td><img [src]="collectionItem.imgPath" alt="{{ collectionItem.collectionName }}" class="img-thumbnail" style="max-width: 100px;"></td>
+          <td>
+            <button class="btn btn-outline-dark btn-sm me-2"  style="border-radius: 0;"
+            >Delete</button>
+            <button class="btn btn-outline-dark btn-sm"  style="border-radius: 0;"
+            >Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- No Data Found -->
+  <div *ngIf="!loading && !collections.length" class="alert alert-warning text-center">
+    No collections available.
+  </div>
+
+ 
+   
+</div>
+<div
+  class="modal fade"
+  id="addCollectionModal"
+  tabindex="-1"
+  aria-labelledby="addCollectionModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content"style="border-radius: 0;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addCollectionModalLabel">Add Collections</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form #collectionForm="ngForm">
+          <div *ngFor="let item of newCollections; let i = index">
+            <div class="mb-3">
+              <label for="collectionName{{ i }}" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="collectionName{{ i }}"
+                [(ngModel)]="item.name"
+                name="name{{ i }}"
+                required
+                style="border-radius: 0;"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="collectionFile{{ i }}" class="form-label">File</label>
+              <input
+                type="file"
+                class="form-control"
+                id="collectionFile{{ i }}"
+                (change)="onFileChange($event, i)"
+                style="border-radius: 0;"
+              />
+            </div>
+            <button
+              type="button"
+              class="btn btn-danger mb-3"
+              (click)="removeCollection(i)"
+              style="border-radius: 0;"
+            >
+              Remove
+            </button>
+          </div>
+          <button type="button" class="btn btn-secondary" style="border-radius: 0;" (click)="addCollection()">
+            Add More
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          style="border-radius: 0;"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="saveCollections()"
+          [disabled]="!collectionForm.form.valid"
+          style="border-radius: 0;"
+        >
+          Save Collections
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
