@@ -1,0 +1,106 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Product List</h2>
+
+  <!-- Loading Indicator -->
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    {{ error }}
+  </div>
+
+  <!-- Products Table -->
+  <table *ngIf="!loading && !error && products.length > 0" class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>Product Name</th>
+        <th>Status</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ product.title }}</td>
+        <td>{{ product.stockStatus }}</td>
+        <td>{{ product.price | currency }}</td>
+        <td>{{ product.totalStockQuantity }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" (click)="openImageModal(product.id)">
+            Add Image
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No Products Message -->
+  <div *ngIf="!loading && !error && products.length === 0" class="alert alert-info text-center">
+    No products available.
+  </div>
+</div>
+
+<!-- Image Upload Modal -->
+<div *ngIf="showModal" class="modal" tabindex="-1" style="display: block;" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Upload Images for Product</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <input type="file" (change)="onFileInput($event)" multiple />
+          <div
+            class="drop-zone border p-3 mt-3"
+            (drop)="onFileDrop($event)"
+            (dragover)="onDragOver($event)"
+          >
+            Drag and drop files here
+          </div>
+        </div>
+
+        <!-- Image Previews -->
+        <div class="image-preview mt-3">
+          <ul cdkDropList (cdkDropListDropped)="drop($event)" class="list-group">
+            <li
+              *ngFor="let image of imageFiles; let i = index"
+              class="list-group-item d-flex align-items-center"
+              cdkDrag
+            >
+            <img
+            [src]="image.preview"
+            alt="Image preview"
+            class="me-3"
+            style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"
+          />
+          
+              <span>{{ i + 1 }}. {{ image.file.name }}</span>
+              <button
+                type="button"
+                class="btn btn-danger btn-sm ms-auto"
+                (click)="removeImage(i)"
+              >
+                Remove
+              </button>
+              <span class="badge bg-primary ms-2">{{ image.order }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="modal-footer mt-3">
+          <button type="button" class="btn btn-primary" (click)="uploadImages()">Upload</button>
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

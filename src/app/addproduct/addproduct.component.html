@@ -1,0 +1,265 @@
+<h2 style="text-align: left; font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; color: #0d0d0d;">Add
+  New Product-</h2>
+<div class="form-container">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" id="title" [(ngModel)]="productData.title" name="title" placeholder="Enter Product Title" />
+    </div>
+    <!-- Short description -->
+    <div class="form-group">
+      <label for="shortDescription">Short Description:</label>
+      <textarea id="shortDescription" [(ngModel)]="productData.shortDescription" name="shortDescription"
+        placeholder="Enter Short Description" style="height: 30px; resize: none; overflow-y: hidden;"></textarea>
+    </div>
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" [(ngModel)]="productData.description" name="description"
+        placeholder="Enter Product Description" style="height: 60px; resize: none; "></textarea>
+    </div>
+
+
+
+    <div>
+      <!-- Category -->
+      <label for="categories">Category:</label>
+      <select id="categories" name="category" [(ngModel)]="selectedCategoryId" (change)="onCategoryChange()">
+        <option value="" disabled selected>Select a category</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <!-- Types  -->
+      <label for="types">Type:</label>
+      <select id="types" name="type" [(ngModel)]="productData.type">
+        <option value="" disabled selected>Select a type</option>
+        <option *ngFor="let type of types" [value]="type.id">
+          {{ type.typeName }}
+        </option>
+      </select>
+    </div>
+
+
+
+
+
+
+    <!-- price-->
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="number" id="price" [(ngModel)]="productData.price" name="price" placeholder="Enter Price" />
+    </div>
+
+
+    <!-- Stock Quantity -->
+    <div class="form-group">
+      <label for="totalStockQuantity">Stock Quantity:</label>
+      <input type="number" id="totalStockQuantity" [(ngModel)]="productData.totalStockQuantity"
+        name="totalStockQuantity" placeholder="Enter totalStockQuantity" />
+    </div>
+    <!-- Weight-->
+    <div class="form-group">
+      <label for="netWeight">Weight:</label>
+      <input type="text" id="netWeight" [(ngModel)]="productData.netWeight" name="netWeight"
+        placeholder="Enter netWeight" />
+    </div>
+    <!-- discount -->
+    <div class="form-group">
+      <label for="discount">Discount(%):</label>
+      <input type="number" id="discount" [(ngModel)]="productData.discount" name="discount"
+        placeholder="Enter discount" />
+    </div>
+  
+    <div class="form-group d-flex align-items-center gap-3">
+      <label for="file1" class="mb-0">Image 1:</label>
+      <input type="file" (change)="onFileChange($event, 'file1')" />
+      
+      <label for="file2" class="mb-0">Image 2:</label>
+      <input type="file" (change)="onFileChange($event, 'file2')" />
+    </div>
+    
+    
+    <!-- Status-->
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <select id="status" [(ngModel)]="productData.status" name="status" class="form-control">
+        <option value="published">Published</option>
+        <option value="scheduled">Scheduled</option>
+      </select>
+    </div>
+
+    <!--  if status is 'scheduled' show publishDate-->
+    <div class="form-group" *ngIf="productData.status === 'scheduled'">
+      <label for="publishDate">Publish Date:</label>
+      <input type="datetime-local" id="publishDate" [(ngModel)]="productData.publishDate" name="publishDate" />
+    </div>
+
+    <div class="form-group">
+      <label for="bestseller">Bestseller:</label>
+      <div style="display: flex; align-items: center;">
+        <label style="margin-right: 10px;">
+          <input type="radio" id="bestsellerYes" name="bestseller" value="1" [(ngModel)]="productData.bestseller" />
+          Yes
+        </label>
+        <label>
+          <input type="radio" id="bestsellerNo" name="bestseller" value="0" [(ngModel)]="productData.bestseller" />
+          No
+        </label>
+      </div>
+    </div>
+
+    <!-- How to use-->
+    <div class="form-group">
+      <label for="howToUse">How to Use:</label>
+      <textarea id="howToUse" [(ngModel)]="productData.howToUse" name="howToUse"
+        placeholder="Enter how to use the product" rows="3" style="height: 60px; resize: none; "></textarea>
+    </div>
+
+    <!-- Who Can Use -->
+    <div class="form-group">
+      <label for="whoCanUse">Who Can Use:</label>
+      <textarea id="whoCanUse" [(ngModel)]="productData.whoCanUse" name="whoCanUse"
+        placeholder="Enter who can use the product" rows="3" style="height: 60px; resize: none; "></textarea>
+    </div>
+
+    <!-- Composition -->
+    <div class="form-group">
+      <label for="composition">Composition:</label>
+      <textarea id="composition" [(ngModel)]="productData.composition" name="composition"
+        placeholder="Enter product composition"  style="height: 60px; resize: none; "></textarea>
+    </div>
+
+    <!-- Special Content -->
+    <div class="form-group">
+      <label for="specialContent">Special Content:</label>
+      <textarea id="specialContent" [(ngModel)]="productData.specialContent" name="specialContent"
+        placeholder="Enter special content details"  style="height: 60px; resize: none; "></textarea>
+    </div>
+    <div class="container mt-4">
+      <!-- Ingredients and Concerns in a single line -->
+      <div class="row">
+        <div class="col-6">
+          <!-- Ingredients -->
+          <label for="ingredientsDropdown">Ingredients:</label>
+          <div class="dropdown mb-3 form-group">
+            <button class="btn btn-outline-secondary rounded-0 dropdown-toggle" type="button" id="ingredientsDropdown"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Select Ingredients
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="ingredientsDropdown">
+              <li *ngFor="let ingredient of ingredient">
+                <label class="dropdown-item">
+                  <input type="checkbox" [value]="ingredient.id"
+                    (change)="toggleSelection($event, productData.ingredients, ingredient.id)" />
+                  {{ ingredient.ingredientName }}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+    
+        <div class="col-6">
+          <!-- Concerns -->
+          <label for="concernsDropdown">Concerns:</label>
+          <div class="dropdown mb-3 form-group">
+            <button class="btn btn-outline-secondary rounded-0 dropdown-toggle" type="button" id="concernsDropdown"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Select Concerns
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="concernsDropdown">
+              <li *ngFor="let concern of concern">
+                <label class="dropdown-item">
+                  <input type="checkbox" [value]="concern.id"
+                    (change)="toggleSelection($event, productData.concerns, concern.id)" />
+                  {{ concern.concernName }}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Care Regimens and Collections in a single line -->
+      <div class="row">
+        <div class="col-6">
+          <!-- Care Regimens -->
+          <label for="careRegimenDropdown">Care Regimens:</label>
+          <div class="dropdown mb-3 form-group">
+            <button class="btn btn-outline-secondary rounded-0 dropdown-toggle" type="button" id="careRegimenDropdown"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Select Care Regimens
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="careRegimenDropdown">
+              <li *ngFor="let regimen of careRegimen">
+                <label class="dropdown-item">
+                  <input type="checkbox" [value]="regimen.id"
+                    (change)="toggleSelection($event, productData.careRegimen, regimen.id)" />
+                  {{ regimen.careRegimenName }}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+    
+        <div class="col-6">
+          <!-- Collections -->
+          <label for="collectionsDropdown">Collections:</label>
+          <div class="dropdown mb-3 form-group">
+            <button class="btn btn-outline-secondary rounded-0 dropdown-toggle" type="button" id="collectionsDropdown"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Select Collections
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="collectionsDropdown">
+              <li *ngFor="let collection of collections">
+                <label class="dropdown-item">
+                  <input type="checkbox" [value]="collection.id"
+                    (change)="toggleSelection($event, productData.Collections, collection.id)" />
+                  {{ collection.collectionName }}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="form-group">
+      <label for="composition">up Sells:</label>
+      <app-live-search></app-live-search>
+
+    </div>
+    <div class="form-group">
+      <label for="composition">Cross sells:</label>
+      <app-live-search></app-live-search>
+
+    </div>
+    <div class="form-group">
+      <label for="composition">Bundle Sells:</label>
+      <app-live-search></app-live-search>
+
+    </div>
+   
+    <div class="form-group">
+      <label for="bundleSellTitle">Bundle sells Title:</label>
+      <input type="text" id="title" [(ngModel)]="productData.bundleSellTitle" name="bundleSellTitle"
+        placeholder="Enter BundleSell Title" />
+    </div>
+    <div class="form-group">
+      <label for="bundleSellDiscount">Bundle Sells Discount:</label>
+      <input type="number" id="bundleSellDiscount" [(ngModel)]="productData.bundleSellDiscount"
+        name="bundleSellDiscount" placeholder="Enter Bundle Sell Discount" />
+    </div>
+    <div style="display: flex; justify-content: flex-end; gap: 10px;">
+      <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn btn-success">Submit</button>
+
+    </div>
+    
+    
+  </form>
+</div>

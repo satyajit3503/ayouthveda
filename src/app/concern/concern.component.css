@@ -1,0 +1,14 @@
+.img-thumbnail {
+    max-height: 100px;
+    max-width: 100px;
+  }
+  .modal.show {
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-dialog {
+    max-width: 500px;
+    margin: 100px auto;
+  }
+  
