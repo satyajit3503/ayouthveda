@@ -1,0 +1,17 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .spinner-border {
+    margin-top: 20px;
+  }
+  .modal-body {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .btn-danger {
+    margin-left: 5px;
+  }
+  

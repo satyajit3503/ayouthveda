@@ -1,0 +1,55 @@
+/* Base Reset */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.app-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.app-item {
+  flex: 1 1 calc(50% - 20px); /* Adjust to make items 2 per row with spacing */
+  min-width: 300px;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(189, 187, 187, 0.1);
+  /* transition: box-shadow 0.3s ease, transform 0.3s ease; */
+}
+
+.app-item:hover {
+  box-shadow: 0 4px 10px rgba(199, 198, 198, 0.15);
+  /* transform: translateY(-5px); */
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .app-item {
+      flex: 1 1 100%; /* Make items full width on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+      padding: 10px;
+  }
+  .app-item {
+      padding: 15px;
+  }
+}

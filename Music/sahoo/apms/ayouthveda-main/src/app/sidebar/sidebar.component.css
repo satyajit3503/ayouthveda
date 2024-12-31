@@ -1,0 +1,112 @@
+/* Sidebar container */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    border-right: 1px solid #ece6e6;
+    padding-top: 20px;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Logo */
+  .logo {
+    margin-bottom: 30px;
+  }
+  
+  .logo-large {
+    width: 140px;
+    display: block;
+  }
+  
+  .logo-small {
+    width: 40px;
+    display: none;
+  }
+  
+  /* Navigation Links */
+  .nav-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+  }
+  
+  .nav-links li {
+    margin: 10px 0;
+  }
+  
+  /* Default link styles */
+  .nav-links li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* Active link styles */
+  .nav-links li.active a {
+    background-color: #4a90e2; /* Highlight background */
+    color: white; /* Change text color */
+    font-weight: bold;
+  }
+  
+  /* Icon styling */
+  .nav-links li .icon {
+    margin-right: 10px;
+  }
+  
+  /* Help Section */
+  .help-section {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .help-text {
+    background: linear-gradient(90deg, #4a90e2, #9b59b6);
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: inline-block;
+  }
+  
+  .help-icon {
+    margin-right: 5px;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 200px;
+      padding-top: 15px;
+      padding-left: 15px;
+    }
+  
+    .logo-large {
+      display: none;
+    }
+  
+    .logo-small {
+      display: block;
+    }
+  
+    .nav-links li a {
+      font-size: 14px;
+      padding: 8px 10px;
+    }
+  
+    .help-text {
+      font-size: 11px;
+    }
+  }
+  
