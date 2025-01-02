@@ -1,17 +1,27 @@
 <h2 style="text-align: left; font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; color: #0d0d0d;">Add
   New Product-</h2>
-<div class="form-container" style="background-color: blanchedalmond;">
+<div class="form-container" style="background-color: #dde7f5;">
   <form (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="title">Title:<span style="color: red;">*</span></label>
-      <input type="text" id="title" [(ngModel)]="productData.title" name="title" placeholder="Enter Product Title" />
+    <div class="row">
+      <!-- Title Field -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="title">Title:<span style="color: red;">*</span></label>
+          <input type="text" id="title" [(ngModel)]="productData.title" name="title" 
+            placeholder="Enter Product Title" class="form-control" />
+        </div>
+      </div>
+      <!-- Short Description Field -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="shortDescription">Short Description:<span style="color: red;">*</span></label>
+          <textarea id="shortDescription" [(ngModel)]="productData.shortDescription" name="shortDescription"
+            placeholder="Enter Short Description" class="form-control"
+            style="height: 30px; resize: none; overflow-y: hidden;"></textarea>
+        </div>
+      </div>
     </div>
-    <!-- Short description -->
-    <div class="form-group">
-      <label for="shortDescription">Short Description:<span style="color: red;">*</span></label>
-      <textarea id="shortDescription" [(ngModel)]="productData.shortDescription" name="shortDescription"
-        placeholder="Enter Short Description" style="height: 30px; resize: none; overflow-y: hidden;"></textarea>
-    </div>
+    
     <!-- Description -->
     <div class="form-group">
       <label for="description">Description:<span style="color: red;">*</span></label>
@@ -19,78 +29,131 @@
         placeholder="Enter Product Description" style="height: 60px; resize: none; "></textarea>
     </div>
 
-
-
-    <div class="form-group">
-      <label for="categories" class="form-label mb-0">Category:<span style="color: red;">*</span></label>
-      <select id="categories" name="category" class="form-select" [(ngModel)]="productData.category" (change)="onCategoryChange()">
-        <option value="" disabled selected>Select a category</option>
-        <option *ngFor="let category of categories" [value]="category.id">
-          {{ category.name }}
-        </option>
-      </select>
-    </div>
-
-  
-
-    <!-- Type -->
-    <div class="form-group">
-      <label for="types" class="form-label mb-0">Type:<span style="color: red;">*</span></label>
-      <select id="types" name="type" class="form-select" [(ngModel)]="productData.type">
-        <option value="" disabled selected>Select a type</option>
-        <option *ngFor="let type of types" [value]="type.id">
-          {{ type.typeName }}
-        </option>
-      </select>
-    </div>
-
-
-
-
-
-    <!-- price-->
-    <div class="form-group">
-      <label for="price">Price:<span style="color: red;">*</span></label>
-      <input type="number" id="price" [(ngModel)]="productData.price" name="price" placeholder="Enter Price" />
-    </div>
-
-
-    <!-- Stock Quantity -->
-    <div class="form-group">
-      <label for="totalStockQuantity">Stock Quantity:<span style="color: red;">*</span></label>
-      <input type="number" id="totalStockQuantity" [(ngModel)]="productData.totalStockQuantity"
-        name="totalStockQuantity" placeholder="Enter totalStockQuantity" />
-    </div>
-    <!-- Weight-->
-    <div class="form-group">
-      <label for="netWeight">Weight:<span style="color: red;">*</span></label>
-      <input type="text" id="netWeight" [(ngModel)]="productData.netWeight" name="netWeight"
-        placeholder="Enter netWeight" />
-    </div>
-    <!-- discount -->
-    <div class="form-group">
-      <label for="discount">Discount(%):<span style="color: red;">*</span></label>
-      <input type="number" id="discount" [(ngModel)]="productData.discount" name="discount"
-        placeholder="Enter discount" />
-    </div>
-  
-
+    <div class="row">
+      <!-- Category Field -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="categories" class="form-label mb-0">Category:<span style="color: red;">*</span></label>
+          <select id="categories" name="category" class="form-select" [(ngModel)]="productData.category" (change)="onCategoryChange()">
+            <option value="" disabled selected>Select a category</option>
+            <option *ngFor="let category of categories" [value]="category.id">
+              {{ category.name }}
+            </option>
+          </select>
+        </div>
+      </div>
     
-    <!-- Status-->
-    <div class="form-group">
-      <label for="status">Status:<span style="color: red;">*</span></label>
-      <select id="status" [(ngModel)]="productData.status" name="status" class="form-control">
-        <option value="published">Published</option>
-        <option value="scheduled">Scheduled</option>
-      </select>
+      <!-- Type Field -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="types" class="form-label mb-0">Type:<span style="color: red;">*</span></label>
+          <select id="types" name="type" class="form-select" [(ngModel)]="productData.type">
+            <option value="" disabled selected>Select a type</option>
+            <option *ngFor="let type of types" [value]="type.id">
+              {{ type.typeName }}
+            </option>
+          </select>
+        </div>
+      </div>
     </div>
-
-    <!--  if status is 'scheduled' show publishDate-->
-    <div class="form-group" *ngIf="productData.status === 'scheduled'">
-      <label for="publishDate">Publish Date:<span style="color: red;">*</span></label>
-      <input type="datetime-local" id="publishDate" [(ngModel)]="productData.publishDate" name="publishDate" />
+    <div class="row">
+      <!-- Price Field -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="price">Price:<span style="color: red;">*</span></label>
+          <input 
+            type="number" 
+            id="price" 
+            [(ngModel)]="productData.price" 
+            name="price" 
+            class="form-control" 
+            placeholder="Enter Price" 
+          />
+        </div>
+      </div>
+    
+      <!-- Discount Field -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="discount">Discount(%):<span style="color: red;">*</span></label>
+          <input 
+            type="number" 
+            id="discount" 
+            [(ngModel)]="productData.discount" 
+            name="discount" 
+            class="form-control" 
+            placeholder="Enter Discount" 
+          />
+        </div>
+      </div>
     </div>
+    
 
+    <div class="row">
+      <!-- Stock Quantity Field -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="totalStockQuantity">Stock Quantity:<span style="color: red;">*</span></label>
+          <input 
+            type="number" 
+            id="totalStockQuantity" 
+            [(ngModel)]="productData.totalStockQuantity"
+            name="totalStockQuantity" 
+            class="form-control"
+            placeholder="Enter Stock Quantity" 
+          />
+        </div>
+      </div>
+    
+      <!-- Weight Field -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="netWeight">Weight:<span style="color: red;">*</span></label>
+          <input 
+            type="text" 
+            id="netWeight" 
+            [(ngModel)]="productData.netWeight" 
+            name="netWeight"
+            class="form-control"
+            placeholder="Enter Weight" 
+          />
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="row">
+      <!-- Status Field -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="status">Status:<span style="color: red;">*</span></label>
+          <select 
+            id="status" 
+            [(ngModel)]="productData.status" 
+            name="status" 
+            class="form-control"
+          >
+            <option value="published">Published</option>
+            <option value="scheduled">Scheduled</option>
+          </select>
+        </div>
+      </div>
+    
+      <!-- Publish Date Field (conditionally displayed) -->
+      <div class="col-md-6" *ngIf="productData.status === 'scheduled'">
+        <div class="form-group">
+          <label for="publishDate">Publish Date:<span style="color: red;">*</span></label>
+          <input 
+            type="datetime-local" 
+            id="publishDate" 
+            [(ngModel)]="productData.publishDate" 
+            name="publishDate" 
+            class="form-control"
+          />
+        </div>
+      </div>
+    </div>
+    
     <div class="form-group">
       <label for="bestseller">Bestseller:</label>
       <div style="display: flex; align-items: center;">

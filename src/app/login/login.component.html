@@ -1,44 +1,73 @@
-<div class="container mt-5">
-    <div class="row justify-content-center" style="padding-top: 10%;">
-      <div class="col-md-6 col-lg-4">
-        <div class="card shadow-sm">
-          <div class="card-header text-center">
-            <h4>Login</h4>
+<!-- login -->
+<div  style="width: 100vw;  " class="mt-4 ">
+  <div class="container d-flex flex-row mainbox">
+    <!-- section 1 -->
+    <div class="container heading box1">
+      <br><br><br><br>
+      <img
+        src="https://www.lystloc.com/blog/wp-content/uploads/2022/12/Lystloc4.webp"
+        style="width: 70%"
+        alt="logo"
+      />
+      <br />
+
+      <span
+        class="mt-1 mb-5 pb-1"
+        style="
+          font-size: 2.4em;
+          font-weight: bolder;
+          color: rgba(21, 19, 19, 0.7);
+        "
+      >
+        AYOUTHVEDA DASHBOARD
+      </span>
+    </div>
+    <!-- section1 ends here -->
+
+    <!-- <section 2  login form-->
+    <div class="container boxform box2" >
+      <div class="center mt-3" style="width: 100%;">
+        <form >
+          <h4 class="mt-5 mb-2 here">Login Here!!</h4>
+          <br />
+
+          <div class="input-group input-group-sm mb-3">
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+            style="    padding: 7px 11px; 
+            font-size: 1rem;
+            margin: 2px 29px;" placeholder="Enter Email"   [(ngModel)]="loginData.username"
+                name="username">
           </div>
-          <div class="card-body">
-            <form>
-              <div class="form-group mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email Address</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                [(ngModel)]="loginData.username"
-                name="username"
-                />
-              </div>
-              <div class="form-group mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Password"
-                  [(ngModel)]="loginData.password"
-                  name="password"
-                />
-              </div> 
-              <button type="submit" (click)="login()" class="btn btn-primary w-100">
-                Submit
-              </button>
-            </form>
+          <div class="input-group input-group-sm mb-3">
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+            style="    padding: 7px 11px; 
+            font-size: 1rem;
+            margin: 2px 29px;" placeholder="Enter Password"   [(ngModel)]="loginData.password"
+                name="password">
           </div>
-        </div>
+          
+
+
+     
+
+          <!-- button -->
+          <div class="text-center pt-1 mb-4 pb-1 d-block">
+            <input
+              class="btn btn-danger btn-block p-1 mb-1 w-50"
+              type="submit"
+              value="Login"
+              style="font-size: 1.2em"
+              (click)="login()"
+            /><br />
+            <!-- forgot password -->
+         
+          </div>
+
+          <!-- signup button here -->
+          
+        </form>
       </div>
+
     </div>
   </div>
-  
-
-<!-- <button ><h2>Click me</h2></button> -->
+</div>

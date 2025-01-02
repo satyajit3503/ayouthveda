@@ -8,7 +8,7 @@ body {
 
 /* Form container */
 .form-container {
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
     background-color: #fff;
     padding: 20px;
@@ -105,4 +105,12 @@ textarea {
 /* Checkbox styling */
 input[type="checkbox"] {
     margin-right: 10px;
+}
+
+form input{
+flex: 1;
+padding: 8px;
+font-size: 12px;
+border: none;
+border-radius: 7px;
 }

@@ -11,9 +11,10 @@ export class SidebarComponent implements OnInit {
 
   sidebarLinks = [
     { path: '/dashboard', name: 'Dashboard', icon: '📦' },
-    // { path: '/dashboard/addproduct', name: 'Product', icon: '🛒' },
+    // { path: '/dashboard/addproduct', name: 'Products', icon: '🛒' },
     // { path: '/dashboard/insights', name: 'Insights', icon: '📂' },
     { path: '/dashboard/products', name: 'Products', icon: '🛒' },
+    // { path: '/dashboard/products', name: 'Products', icon: '🛒' },
     // { path: '/dashboard/admin', name: 'Reseller', icon: '👤' },
     // { path: '/dashboard/seller',name: 'Manage Sellser', icon: '👥' },
     // { path: '/dashboard/webcontent', name: 'Website Content', icon: '🏢' },
