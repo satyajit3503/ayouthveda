@@ -1,0 +1,41 @@
+{
+    "serviceResponse": [
+      {
+        "id": 1,
+        "title": "Wireless Mouse",
+        "stockStatus": "In Stock",
+        "price": 15.99,
+        "totalStockQuantity": 120
+      },
+      {
+        "id": 2,
+        "title": "Mechanical Keyboard",
+        "stockStatus": "Out of Stock",
+        "price": 45.50,
+        "totalStockQuantity": 0
+      },
+      {
+        "id": 3,
+        "title": "HD Monitor",
+        "stockStatus": "In Stock",
+        "price": 199.99,
+        "totalStockQuantity": 50
+      },
+      {
+        "id": 4,
+        "title": "USB-C Docking Station",
+        "stockStatus": "Low Stock",
+        "price": 89.99,
+        "totalStockQuantity": 5
+      },
+      {
+        "id": 5,
+        "title": "External Hard Drive",
+        "stockStatus": "In Stock",
+        "price": 79.49,
+        "totalStockQuantity": 25
+      }
+    ],
+    "serviceStatus": "Success"
+  }
+  

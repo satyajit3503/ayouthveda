@@ -1,0 +1,344 @@
+<h2 style="text-align: left; font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; color: #0d0d0d;">Add
+  New Product-</h2>
+<div class="form-container" style="background-color: blanchedalmond;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Title:<span style="color: red;">*</span></label>
+      <input type="text" id="title" [(ngModel)]="productData.title" name="title" placeholder="Enter Product Title" />
+    </div>
+    <!-- Short description -->
+    <div class="form-group">
+      <label for="shortDescription">Short Description:<span style="color: red;">*</span></label>
+      <textarea id="shortDescription" [(ngModel)]="productData.shortDescription" name="shortDescription"
+        placeholder="Enter Short Description" style="height: 30px; resize: none; overflow-y: hidden;"></textarea>
+    </div>
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description:<span style="color: red;">*</span></label>
+      <textarea id="description" [(ngModel)]="productData.description" name="description"
+        placeholder="Enter Product Description" style="height: 60px; resize: none; "></textarea>
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="categories" class="form-label mb-0">Category:<span style="color: red;">*</span></label>
+      <select id="categories" name="category" class="form-select" [(ngModel)]="productData.category" (change)="onCategoryChange()">
+        <option value="" disabled selected>Select a category</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+
+  
+
+    <!-- Type -->
+    <div class="form-group">
+      <label for="types" class="form-label mb-0">Type:<span style="color: red;">*</span></label>
+      <select id="types" name="type" class="form-select" [(ngModel)]="productData.type">
+        <option value="" disabled selected>Select a type</option>
+        <option *ngFor="let type of types" [value]="type.id">
+          {{ type.typeName }}
+        </option>
+      </select>
+    </div>
+
+
+
+
+
+    <!-- price-->
+    <div class="form-group">
+      <label for="price">Price:<span style="color: red;">*</span></label>
+      <input type="number" id="price" [(ngModel)]="productData.price" name="price" placeholder="Enter Price" />
+    </div>
+
+
+    <!-- Stock Quantity -->
+    <div class="form-group">
+      <label for="totalStockQuantity">Stock Quantity:<span style="color: red;">*</span></label>
+      <input type="number" id="totalStockQuantity" [(ngModel)]="productData.totalStockQuantity"
+        name="totalStockQuantity" placeholder="Enter totalStockQuantity" />
+    </div>
+    <!-- Weight-->
+    <div class="form-group">
+      <label for="netWeight">Weight:<span style="color: red;">*</span></label>
+      <input type="text" id="netWeight" [(ngModel)]="productData.netWeight" name="netWeight"
+        placeholder="Enter netWeight" />
+    </div>
+    <!-- discount -->
+    <div class="form-group">
+      <label for="discount">Discount(%):<span style="color: red;">*</span></label>
+      <input type="number" id="discount" [(ngModel)]="productData.discount" name="discount"
+        placeholder="Enter discount" />
+    </div>
+  
+
+    
+    <!-- Status-->
+    <div class="form-group">
+      <label for="status">Status:<span style="color: red;">*</span></label>
+      <select id="status" [(ngModel)]="productData.status" name="status" class="form-control">
+        <option value="published">Published</option>
+        <option value="scheduled">Scheduled</option>
+      </select>
+    </div>
+
+    <!--  if status is 'scheduled' show publishDate-->
+    <div class="form-group" *ngIf="productData.status === 'scheduled'">
+      <label for="publishDate">Publish Date:<span style="color: red;">*</span></label>
+      <input type="datetime-local" id="publishDate" [(ngModel)]="productData.publishDate" name="publishDate" />
+    </div>
+
+    <div class="form-group">
+      <label for="bestseller">Bestseller:</label>
+      <div style="display: flex; align-items: center;">
+        <label style="margin-right: 10px;">
+          <input type="radio" id="bestsellerYes" name="bestseller" [value]="1" [(ngModel)]="productData.bestseller" />
+          Yes
+        </label>
+        <label>
+          <input type="radio" id="bestsellerNo" name="bestseller" [value]="0" [(ngModel)]="productData.bestseller" />
+          No
+        </label>
+      </div>
+    </div>
+
+    <div class="container mt-4 mb-3" style="margin-left: 9rem!important;">
+      <!-- Ingredients and Concerns in a single line -->
+      <div class="row">
+        <div class="col-6">
+          <!-- Ingredients -->
+          <label for="ingredientsDropdown">Ingredients:<span style="color: red;">*</span></label>
+          <div class="dropdown mb-3 form-group">
+            <button class="btn btn-outline-secondary rounded-0 dropdown-toggle" type="button" id="ingredientsDropdown"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Select Ingredients
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="ingredientsDropdown">
+              <li *ngFor="let ingredient of ingredient">
+                <label class="dropdown-item">
+                  <input type="checkbox" [value]="ingredient.id"
+                    (change)="toggleSelection($event, productData.ingredients, ingredient.id)" />
+                  {{ ingredient.ingredientName }}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+    
+        <div class="col-6">
+          <!-- Concerns -->
+          <label for="concernsDropdown">Concerns:<span style="color: red;">*</span></label>
+          <div class="dropdown mb-3 form-group">
+            <button class="btn btn-outline-secondary rounded-0 dropdown-toggle" type="button" id="concernsDropdown"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Select Concerns
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="concernsDropdown">
+              <li *ngFor="let concern of concern">
+                <label class="dropdown-item">
+                  <input type="checkbox" [value]="concern.id"
+                    (change)="toggleSelection($event, productData.concerns, concern.id)" />
+                  {{ concern.concernName }}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Care Regimens and Collections in a single line -->
+      <div class="row" >
+        <div class="col-6">
+          <!-- Care Regimens -->
+          <label for="careRegimenDropdown">Care Regimens:<span style="color: red;">*</span></label>
+          <div class="dropdown mb-3 form-group">
+            <button class="btn btn-outline-secondary rounded-0 dropdown-toggle" type="button" id="careRegimenDropdown"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Select Care Regimens
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="careRegimenDropdown">
+              <li *ngFor="let regimen of careRegimen">
+                <label class="dropdown-item">
+                  <input type="checkbox" [value]="regimen.id"
+                    (change)="toggleSelection($event, productData.careRegimen, regimen.id)" />
+                  {{ regimen.careRegimenName }}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+    
+        <div class="col-6">
+          <!-- Collections -->
+          <label for="collectionsDropdown">Collections:<span style="color: red;">*</span></label>
+          <div class="dropdown mb-3 form-group">
+            <button class="btn btn-outline-secondary rounded-0 dropdown-toggle" type="button" id="collectionsDropdown"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Select Collections
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="collectionsDropdown">
+              <li *ngFor="let collection of collections">
+                <label class="dropdown-item">
+                  <input type="checkbox" [value]="collection.id"
+                    (change)="toggleSelection($event, productData.Collections, collection.id)" />
+                  {{ collection.collectionName }}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- How to use-->
+    <div class="form-group">
+      <label for="howToUse">How to Use:<span style="color: red;">*</span></label>
+      <textarea id="howToUse" [(ngModel)]="productData.howToUse" name="howToUse"
+        placeholder="Enter how to use the product" rows="3" style="height: 60px; resize: none; "></textarea>
+    </div>
+
+    <!-- Who Can Use -->
+    <div class="form-group">
+      <label for="whoCanUse">Who Can Use:<span style="color: red;">*</span></label>
+      <textarea id="whoCanUse" [(ngModel)]="productData.whoCanUse" name="whoCanUse"
+        placeholder="Enter who can use the product" rows="3" style="height: 60px; resize: none; "></textarea>
+    </div>
+
+    <!-- Composition -->
+    <div class="form-group">
+      <label for="composition">Composition:<span style="color: red;">*</span></label>
+      <textarea id="composition" [(ngModel)]="productData.composition" name="composition"
+        placeholder="Enter product composition"  style="height: 60px; resize: none; "></textarea>
+    </div>
+
+    <!-- Special Content -->
+    <div class="form-group">
+      <label for="specialContent">Special Content:</label>
+      <textarea id="specialContent" [(ngModel)]="productData.specialContent" name="specialContent"
+        placeholder="Enter special content details"  style="height: 60px; resize: none; "></textarea>
+    </div>
+   
+
+    <!-- <div class="form-group">
+      <label for="composition">up Sells:</label>
+      <app-live-search></app-live-search>
+
+    </div>
+    <div class="form-group">
+      <label for="composition">Cross sells:</label>
+      <app-live-search></app-live-search>
+
+    </div>
+    <div class="form-group">
+      <label for="composition">Bundle Sells:</label>
+      <app-live-search></app-live-search>
+
+    </div>
+    -->
+    <div class="form-group">
+      <div class="row" style="margin-left: 9rem!important;">
+        <!-- Up Sells Dropdown -->
+        <div class="col-md-4">
+          <label for="upsellsDropdown">Up Sells:</label>
+          <div class="dropdown mb-3">
+            <button class="btn btn-outline-secondary rounded-0 dropdown-toggle w-100" type="button"
+              id="upsellsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Select Up Sells
+            </button>
+            <ul class="dropdown-menu w-100" aria-labelledby="upsellsDropdown">
+              <li *ngFor="let upsell of upsellItems">
+                <label class="dropdown-item">
+                  <input type="checkbox" [value]="upsell.id"
+                    (change)="toggleSelection($event, productData.upsell, upsell.id)" />
+                  {{ upsell.name }}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+    
+        <!-- Cross Sells Dropdown -->
+        <div class="col-md-4">
+          <label for="crossSellsDropdown">Cross Sells:</label>
+          <div class="dropdown mb-3">
+            <button class="btn btn-outline-secondary rounded-0 dropdown-toggle w-100" type="button"
+              id="crossSellsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Select Cross Sells
+            </button>
+            <ul class="dropdown-menu w-100" aria-labelledby="crossSellsDropdown">
+              <li *ngFor="let crossSell of crossSellItems">
+                <label class="dropdown-item">
+                  <input type="checkbox" [value]="crossSell.id"
+                    (change)="toggleSelection($event, productData.crossSell, crossSell.id)" />
+                  {{ crossSell.name }}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+    
+        <!-- Bundle Sells Dropdown -->
+        <div class="col-md-4">
+          <label for="bundleSellsDropdown">Bundle Sells:</label>
+          <div class="dropdown mb-3">
+            <button class="btn btn-outline-secondary rounded-0 dropdown-toggle w-100" type="button"
+              id="bundleSellsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Select Bundle Sells
+            </button>
+            <ul class="dropdown-menu w-100" aria-labelledby="bundleSellsDropdown">
+              <li *ngFor="let bundleSell of bundleSellItems">
+                <label class="dropdown-item">
+                  <input type="checkbox" [value]="bundleSell.id"
+                    (change)="toggleSelection($event, productData.bundleSell, bundleSell.id)" />
+                  {{ bundleSell.name }}
+                </label>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+
+    <div class="form-group">
+      <label for="bundleSellTitle">Bundle sells Title:</label>
+      <input type="text" id="title" [(ngModel)]="productData.bundleSellTitle" name="bundleSellTitle"
+        placeholder="Enter BundleSell Title" />
+    </div>
+    <div class="form-group">
+      <label for="bundleSellDiscount">Bundle Sells Discount:</label>
+      <input type="number" id="bundleSellDiscount" [(ngModel)]="productData.bundleSellDiscount"
+        name="bundleSellDiscount" placeholder="Enter Bundle Sell Discount" />
+    </div>
+    <div class="form-group" style="margin-left: 9rem;">
+      <div class="row ">
+        <!-- Image 1 Input -->
+        <div class="col-md-6">
+          <label for="file1" class="form-label">Image 1:<span style="color: red;">*</span></label>
+          <input type="file" class="form-control" id="file1" (change)="onFileChange($event, 'file1')" />
+        </div>
+    
+        <!-- Image 2 Input -->
+
+
+        <div class="col-md-6">
+          <label for="file2" class="form-label">Image 2:<span style="color: red;">*</span></label>
+          <input type="file" class="form-control" id="file2" (change)="onFileChange($event, 'file2')" />
+        </div>
+      </div>
+    </div>
+    
+    <div style="display: flex; justify-content: flex-end; gap: 10px;">
+      <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn btn-success">Submit</button>
+
+    </div>
+    
+    
+  </form>
+</div>

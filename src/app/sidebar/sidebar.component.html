@@ -1,0 +1,30 @@
+<div class="sidebar">
+  <!-- Logo -->
+  <div class="logo">
+    <img src="/assets/logo.svg" alt="logo" class="logo-large" />
+    <img src="/assets/logo_mini.svg" alt="logo" class="logo-small" />
+  </div>
+
+  <!-- Navigation Links -->
+  <ul class="nav-links">
+    <li
+      *ngFor="let link of sidebarLinks; let i = index"
+      [ngClass]="{ 'active': activeLink === i }"
+      (click)="setActiveLink(i)"
+    >
+      <a [routerLink]="link.path" class="link-content">
+        <span class="icon">{{ link.icon }}</span>
+        <span class="link-name">{{ link.name }}</span>
+      </a>
+    </li>
+  </ul>
+
+  <!-- Help Section -->
+  <div class="help-section">
+    <p class="help-text">
+      <span class="help-icon">?</span>
+      <span class="help-text-lg">Need Help</span>
+    </p>
+  </div>
+</div>
+sellerdetails

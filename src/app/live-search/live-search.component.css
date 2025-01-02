@@ -1,0 +1,79 @@
+.search {
+    position: relative;
+  }
+  
+  .searchInputs input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .selectedValues {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .selectedValues .line-clamp-1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .dataResult {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  .hover\:bg-gray-200:hover {
+    background-color: #f7fafc;
+  }
+  
+  .bg-blue-500 {
+    background-color: #3b82f6;
+  }
+  
+  .text-white {
+    color: white;
+  }
+  
+  .text-xs {
+    font-size: 0.75rem;
+  }
+  
+  .inline-flex {
+    display: inline-flex;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .rounded-full {
+    border-radius: 9999px;
+  }
+  
+  .py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+  
+  .px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  .mr-2 {
+    margin-right: 0.5rem;
+  }
+  
+  .mb-2 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .ml-2 {
+    margin-left: 0.5rem;
+  }
+  

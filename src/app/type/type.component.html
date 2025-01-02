@@ -1,0 +1,144 @@
+<div class="container mt-4">
+  <h2 class="mb-3 fs-5">Types</h2>
+
+  <!-- Add Type Button -->
+  <button
+    type="button"
+    class="btn btn-outline-dark mb-3"
+    data-bs-toggle="modal"
+    data-bs-target="#addTypeModal"
+    style="border-radius: 0;font-size: 0.85rem;"
+
+  >
+    <i class="bi bi-plus-circle"></i> Add Type
+  </button>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <!-- Table of Types -->
+  <table class="table  table-bordered table-hover" *ngIf="!loading && types.length" style="font-size: 0.85rem;">
+    <thead class="table-light">
+      <tr>
+        <th>Id</th>
+        <th>Type Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let type of types; let i = index">
+        <td>{{ type.id }}</td>
+        <td>{{ type.typeName }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-outline-dark btn-sm me-2"
+            style="border-radius: 0;"
+
+          >
+           Delete
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-dark btn-sm"
+            style="border-radius: 0;"
+
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No Data Found -->
+  <div *ngIf="!loading && !types.length" class="alert alert-warning">
+    No types available.
+  </div>
+</div>
+
+<!-- Add Type Modal -->
+<!-- Add Type Modal -->
+<div
+  class="modal fade"
+  id="addTypeModal"
+  tabindex="-1"
+  aria-labelledby="addTypeModalLabel"
+>
+  <div class="modal-dialog">
+    <div class="modal-content"   style="border-radius: 0;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTypeModalLabel">Add Types</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div *ngFor="let type of newTypes; let i = index" class="mb-3">
+            <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="typeName{{ i }}"
+              [(ngModel)]="type.name"
+              name="typeName{{ i }}"
+              placeholder="Enter type name"
+              style="border-radius: 0;"
+
+              required
+            />
+            <button
+              type="button"
+              class="btn btn-danger "
+              (click)="removeType(i)"
+              style="border-radius: 0;"
+
+            >
+              Remove
+            </button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline-dark mt-2" (click)="addTypeField()"   style="border-radius: 0;"
+          >
+            Add More
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          data-bs-dismiss="modal"
+          style="border-radius: 0;"
+
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="saveTypes()"
+          data-bs-dismiss="modal"
+          style="border-radius: 0;"
+
+        >
+          Save Types
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

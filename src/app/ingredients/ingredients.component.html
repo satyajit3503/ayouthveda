@@ -1,0 +1,141 @@
+<div class="container mt-4">
+    <h2 class="mb-3 fs-5">Ingredients</h2>
+    <button
+    type="button"
+    class="btn btn-outline-dark mb-3"
+    data-bs-toggle="modal"
+    data-bs-target="#addIngredientModal"
+    style="border-radius: 0;font-size: 0.85rem;"
+  >
+  <i class="bi bi-plus-circle"></i> Add Ingredients
+  </button>
+  
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="text-center my-4">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="error" class="alert alert-danger my-3">
+        {{ error }}
+    </div>
+
+    <!-- Ingredients Table -->
+    <div *ngIf="!loading && ingredient.length">
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Ingredient Name</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ingredientItem of ingredient; let i = index">
+                    <td>{{ ingredientItem.id }}</td>
+                    <td>{{ ingredientItem.ingredientName }}</td>
+                    <td>
+                        <img [src]="ingredientItem.imgPath" alt="{{ ingredientItem.ingredientName }}" class="img-thumbnail" style="max-width: 100px;">
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-dark btn-sm me-2" style="border-radius: 0;" >
+                            Delete
+                        </button>
+                        <button class="btn btn-outline-dark btn-sm" style="border-radius: 0;" >
+                            Edit
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- No Data Found -->
+    <div *ngIf="!loading && !ingredient.length" class="alert alert-warning text-center">
+        No ingredients available.
+    </div>
+</div>
+
+
+<div
+  class="modal fade"
+  id="addIngredientModal"
+  tabindex="-1"
+  aria-labelledby="addIngredientModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content"  style="border-radius: 0;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addIngredientModalLabel">Add Ingredients</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form #ingredientForm="ngForm">
+          <div *ngFor="let item of newIngredients; let i = index">
+            <div class="mb-3">
+              <label for="ingredientName{{ i }}" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="ingredientName{{ i }}"
+                [(ngModel)]="item.name"
+                name="name{{ i }}"
+                required
+                style="border-radius: 0;"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="ingredientFile{{ i }}" class="form-label">File</label>
+              <input
+                type="file"
+                class="form-control"
+                id="ingredientFile{{ i }}"
+                (change)="onFileChange($event, i)"
+                style="border-radius: 0;"
+              />
+            </div>
+            <button
+              type="button"
+              class="btn btn-danger mb-3"
+              style="border-radius: 0;"
+              (click)="removeIngredient(i)"
+            >
+              Remove
+            </button>
+          </div>
+          <button type="button"  style="border-radius: 0;" class="btn btn-secondary" (click)="addIngredient()">
+            Add More
+          </button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          style="border-radius: 0;"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="saveIngredients()"
+          [disabled]="!ingredientForm.form.valid"
+          style="border-radius: 0;"
+        >
+          Save Ingredients
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
