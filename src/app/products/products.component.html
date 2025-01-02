@@ -3,9 +3,7 @@
     <h2 style="font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; color: #0d0d0d; margin: 0;">
       Products-
     </h2>
-    <a routerLink="/dashboard/addproduct" class="btn btn-primary py-1 px-2">
-      + Add Product
-    </a>
+    <a class="btn btn-primary py-1 px-2" (click)="navigateToAddProduct()">+ Add Product</a>
   </div>
   <!-- Loading Indicator -->
   <div *ngIf="loading" class="text-center">
@@ -114,5 +112,6 @@
       </div>
     </div>
   </div>
+  <!-- <router-outlet></router-outlet> -->
 </div>
 

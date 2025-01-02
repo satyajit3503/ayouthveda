@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { AddProductService } from '../Service/addproduct/add-product.service';
 import { CategoriesService } from '../Service/Categories/categories.service';
 import { TypesService } from '../Service/type/types.service';
@@ -12,7 +12,7 @@ import { ConcernService } from '../Service/concern/concern.service';
   templateUrl: './addproduct.component.html',
   styleUrls: ['./addproduct.component.css']
 })
-export class AddproductComponent {
+export class AddproductComponent implements OnInit{
 
   categories: any[] = [];
   types: any[] = [];
@@ -105,11 +105,12 @@ export class AddproductComponent {
     private careRegimenService: CareRegimenService,
     private collectionService: CollectionService,
     private ingredientService: IngredientsService,
-    private concernService: ConcernService
+    private concernService: ConcernService,
 
   ) {}
 
   ngOnInit(): void {
+    console.log("started")
     this.fetchCategories();
     this.fetchCareRegimens();
     this.fetchCollection();
@@ -242,14 +243,50 @@ onCollectionSelect(event: any, id: string): void {
   toggleBestseller(event: any): void {
     this.productData.bestseller = event.target.checked ? 1 : 0;
   }
-  // Handle form submission
-  onSubmit(): void {
-    console.log('Submitting product data:', this.productData);
-  }
-  
+ 
   onCancel(): void {
     // Reset form or navigate away
     console.log("Cancel button clicked");
   } 
+  onSubmit() {
+    // List of mandatory fields with their respective error messages
+    const mandatoryFields = [
+      { field: this.productData.title, name: 'Title' },
+      { field: this.productData.shortDescription, name: 'Short Description' },
+      { field: this.productData.description, name: 'Description' },
+      { field: this.productData.category, name: 'Category' },
+      { field: this.productData.type, name: 'Type' },
+      { field: this.productData.price, name: 'Price' },
+      { field: this.productData.discount, name: 'Discount' },
+      { field: this.productData.totalStockQuantity, name: 'Stock Quantity' },
+      { field: this.productData.netWeight, name: 'Weight' },
+      { field: this.productData.status, name: 'Status' },
+      { field: this.productData.ingredients, name: 'Ingredients' },
+      { field: this.productData.concerns, name: 'Concerns' },
+      { field: this.productData.careRegimen, name: 'Care Regimens' },
+      { field: this.productData.Collections, name: 'Collections' },
+      { field: this.productData.howToUse, name: 'How to Use' },
+      { field: this.productData.whoCanUse, name: 'Who Can Use' },
+      { field: this.productData.composition, name: 'Composition' },
+      { field: this.file1, name: 'Image 1' },
+      { field: this.file2, name: 'Image 2' },
+    ];
+  
+    // Additional validation for conditional fields
+    if (this.productData.status === 'scheduled') {
+      mandatoryFields.push({ field: this.productData.publishDate, name: 'Publish Date' });
+    }
+  
+    // Check for empty or null fields
+    for (const item of mandatoryFields) {
+      if (!item.field || item.field === '' || (Array.isArray(item.field) && item.field.length === 0)) {
+        alert(`Please fill out the mandatory field: ${item.name}`);
+        return; 
+      }
+    }
+
+    console.log('Form submitted successfully:', this.productData);
+    // Add your submission logic here, e.g., calling a service to save the data
+  }
   
 }

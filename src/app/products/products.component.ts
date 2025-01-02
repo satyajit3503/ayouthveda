@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductsService } from '../Service/Products/products.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -15,7 +16,7 @@ export class ProductsComponent {
   selectedProductId: number | null = null;
   imageFiles: { file: File; order: number; preview: string }[] = []; // Store files with their order
   
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService,private router: Router) {}
   ngOnInit(): void {
     this.fetchproducts();
   }
@@ -129,6 +130,10 @@ export class ProductsComponent {
       // Call your API service here to delete the product
     }
   }
-  
+
+  navigateToAddProduct() {
+    console.log("here clicked")
+    this.router.navigate(['/dashboard/addproduct']); // Adjust the path as needed
+  }
   
 }
