@@ -10,10 +10,10 @@ export class SidebarComponent implements OnInit {
   activeLink: number = 0;
 
   sidebarLinks = [
-    { path: '/dashboard', name: 'Dashboard', icon: '📦' },
+    { path: '/home/dashboard', name: 'Dashboard', icon: '📦' },
     // { path: '/dashboard/addproduct', name: 'Products', icon: '🛒' },
     // { path: '/dashboard/insights', name: 'Insights', icon: '📂' },
-    { path: '/dashboard/products', name: 'Products', icon: '🛒' },
+    { path: '/home/products', name: 'Products', icon: '🛒' },
     // { path: '/dashboard/products', name: 'Products', icon: '🛒' },
     // { path: '/dashboard/admin', name: 'Reseller', icon: '👤' },
     // { path: '/dashboard/seller',name: 'Manage Sellser', icon: '👥' },
@@ -42,7 +42,8 @@ export class SidebarComponent implements OnInit {
 
   private updateActiveLink(): void {
     const currentPath = this.router.url;
-    const index = this.sidebarLinks.findIndex((link) => link.path === currentPath);
+    // const index = this.sidebarLinks.findIndex((link) => link.path === currentPath);
+    const index = this.sidebarLinks.findIndex((link) => currentPath.startsWith(link.path));
     this.activeLink = index >= 0 ? index : 0; // Default to the first link if no match
   }
 }

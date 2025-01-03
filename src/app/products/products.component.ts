@@ -14,7 +14,10 @@ export class ProductsComponent {
   showModal: boolean = false;
   selectedProductId: number | null = null;
   imageFiles: { file: File; order: number; preview: string }[] = []; // Store files with their order
-  
+  isProduct: boolean = true;
+  isViewProduct: boolean = false;
+  selectedProduct: any = null;
+
   constructor(private productsService: ProductsService) {}
   ngOnInit(): void {
     this.fetchproducts();
@@ -129,6 +132,26 @@ export class ProductsComponent {
       // Call your API service here to delete the product
     }
   }
+  viewProductDetails(productId: number): void {
+    this.isProduct = false;
+    this.isViewProduct = true;
+
+    // Fetch the selected product details
+    this.selectedProduct = this.products.find((p) => p.id === productId);
+  }
+
+  goBackToProducts(): void {
+    this.isProduct = true;
+    this.isViewProduct = false;
+    this.selectedProduct = null;
+  }
+  editProduct(){
+    console.log("edit product is clicked")
+  }
+  addProductImage(){
+    console.log("add image to product is clicked")
+  }
+
   
   
 }

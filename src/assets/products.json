@@ -1,41 +1,63 @@
-{
+
+  {
+    "status": "success",
+    "message": "Products retrieved successfully.",
     "serviceResponse": [
       {
-        "id": 1,
-        "title": "Wireless Mouse",
-        "stockStatus": "In Stock",
+        "title": "Organic Green Tea",
+        "description": "A refreshing blend of organic green tea leaves.",
+        "shortDescription": "Organic green tea for a healthy lifestyle.",
         "price": 15.99,
-        "totalStockQuantity": 120
+        "discount": 2.00,
+        "totalStockQuantity": 150,
+        "netWeight": "100g",
+        "stockStatus":"in stock",
+        "status": "published",
+        "publishDate": "2023-01-15",
+        "bestseller": 1,
+        "howToUse": "Steep in hot water for 3-5 minutes.",
+        "whoCanUse": "Suitable for all ages.",
+        "composition": "100% organic green tea leaves.",
+        "specialContent": "Rich in antioxidants.",
+        "category": "Beverages",
+        "type": "Tea",
+        "upsell": [101, 102],
+        "crossSell": [201, 202],
+        "bundleSell": [301, 302],
+        "Collections": [401, 402],
+        "ingredients": ["Green Tea Leaves"],
+        "concerns": [501, 502],
+        "careRegimen": [601, 602],
+        "bundleSellTitle": "Tea Lovers Bundle",
+        "bundleSellDiscount": 5.00
       },
       {
-        "id": 2,
-        "title": "Mechanical Keyboard",
-        "stockStatus": "Out of Stock",
-        "price": 45.50,
-        "totalStockQuantity": 0
-      },
-      {
-        "id": 3,
-        "title": "HD Monitor",
-        "stockStatus": "In Stock",
-        "price": 199.99,
-        "totalStockQuantity": 50
-      },
-      {
-        "id": 4,
-        "title": "USB-C Docking Station",
-        "stockStatus": "Low Stock",
-        "price": 89.99,
-        "totalStockQuantity": 5
-      },
-      {
-        "id": 5,
-        "title": "External Hard Drive",
-        "stockStatus": "In Stock",
-        "price": 79.49,
-        "totalStockQuantity": 25
+        "title": "Herbal Face Mask",
+        "description": "A rejuvenating herbal face mask for glowing skin.",
+        "shortDescription": "Natural ingredients for skin care.",
+        "price": 25.00,
+        "discount": 5.00,
+        "totalStockQuantity": 80,
+        "netWeight": "150g",
+        "stockStatus":"in stock",
+        "status": "published",
+        "publishDate": "2023-02-10",
+        "bestseller": 0,
+        "howToUse": "Apply evenly on the face and leave for 15 minutes.",
+        "whoCanUse": "Suitable for all skin types.",
+        "composition": "Herbal extracts and essential oils.",
+        "specialContent": "Cruelty-free and vegan.",
+        "category": "Skin Care",
+        "type": "Face Mask",
+        "upsell": [103, 104],
+        "crossSell": [203, 204],
+        "bundleSell": [303, 304],
+        "Collections": [403, 404],
+        "ingredients": ["Aloe Vera", "Green Tea Extract", "Lavender Oil"],
+        "concerns": [503, 504],
+        "careRegimen": [603, 604],
+        "bundleSellTitle": "Glow Skin Bundle",
+        "bundleSellDiscount": 10.00
       }
-    ],
-    "serviceStatus": "Success"
+    ]
   }
-  

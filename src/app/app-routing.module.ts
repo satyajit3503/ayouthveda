@@ -13,23 +13,24 @@ import { InsightsComponent } from './insights/insights.component';
 import { SellerComponent } from './seller/seller.component';
 import { WebsiteContentComponent } from './website-content/website-content.component';
 
+
 const routes: Routes = [
   // Login route
   { path: 'login', component: LoginComponent },
 
   // Dashboard layout route with children
   {
-    path: 'dashboard',
-    component: LayoutComponent,
+    path: 'home',
+    component: LayoutComponent, // Main layout component for "home"
     children: [
-      { path: '', component: ContentComponent }, // Default route for dashboard
-      { path: 'addproduct', component: AddproductComponent },
-      { path: 'insights', component: InsightsComponent }, // Corrected case
-      { path: 'products', component: ProductsComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // Default child route
+      { path: 'dashboard', component: ContentComponent }, // Dashboard content
+      { path: 'products', component: ProductsComponent }, // Main Products Component
+      { path: 'products/addproduct', component: AddproductComponent }, // Separate route for Add Product
+      { path: 'insights', component: InsightsComponent },
       { path: 'user', component: UserComponent },
       { path: 'seller', component: SellerComponent },
-      { path: 'webcontent', component: WebsiteContentComponent},
-      // { path: 'billingdashboard', component: BillingDashboardComponent },
+      { path: 'webcontent', component: WebsiteContentComponent },
     ],
   },
 
@@ -39,6 +40,7 @@ const routes: Routes = [
   // Wildcard route for 404 or undefined paths
   { path: '**', redirectTo: 'login' },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

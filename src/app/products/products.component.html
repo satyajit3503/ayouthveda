@@ -1,9 +1,10 @@
+<ng-container *ngIf="isProduct">
 <div class="container mt-1">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 style="font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; color: #0d0d0d; margin: 0;">
       Products-
     </h2>
-    <a routerLink="/dashboard/addproduct" class="btn btn-primary py-1 px-2">
+    <a routerLink="/home/products/addproduct" class="btn btn-primary py-1 px-2">
       + Add Product
     </a>
   </div>
@@ -39,15 +40,18 @@
         <td>{{ product.price | currency }}</td>
         <td>{{ product.totalStockQuantity }}</td>
         <td>
-          <a [routerLink]="['/dashboard/product', product.id]" 
-          class="btn btn-outline-success btn-sm me-1" 
-          title="View More Details">
-          <i class="bi bi-box-arrow-in-up-right"></i>
-       </a>
-       
-          <button class="btn btn-outline-danger btn-sm" (click)="deleteProduct(product.id)" title="Delete Product">
-            <i class="bi bi-trash"></i>
-          </button>
+          <button 
+              class="btn btn-outline-success btn-sm me-1" 
+              title="View More Details"
+              (click)="viewProductDetails(product.id)">
+              <i class="bi bi-box-arrow-in-up-right"></i>
+            </button>
+            <button 
+              class="btn btn-outline-danger btn-sm" 
+              (click)="deleteProduct(product.id)" 
+              title="Delete Product">
+              <i class="bi bi-trash"></i>
+            </button>
         </td>
       </tr>
     </tbody>
@@ -58,9 +62,10 @@
     No products available.
   </div>
 </div>
+</ng-container>
 
 <!-- Image Upload Modal -->
-<div *ngIf="showModal" class="modal" tabindex="-1" style="display: block;" role="dialog">
+<!-- <div *ngIf="showModal" class="modal" tabindex="-1" style="display: block;" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -79,7 +84,7 @@
           </div>
         </div>
 
-        <!-- Image Previews -->
+       
         <div class="image-preview mt-3">
           <ul cdkDropList (cdkDropListDropped)="drop($event)" class="list-group">
             <li
@@ -114,5 +119,31 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
+<ng-container *ngIf="isViewProduct">
+  <!-- View Product Details Page -->
+  <div class="container mt-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <button class="btn btn-outline-primary me-2" (click)="goBackToProducts()">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <h3 class="d-inline-block mb-0">Product Details</h3>
+      </div>
+      <div>
+        <button class="btn btn-outline-primary me-2" (click)="editProduct()">
+          <i class="bi bi-pencil"></i> Edit
+        </button>
+        <button class="btn btn-outline-success" (click)="addProductImage()">
+          <i class="bi bi-image"></i> Add Image
+        </button>
+      </div>
+    </div>
+    <p><strong>Product ID:</strong> {{ selectedProduct?.id }}</p>
+    <p><strong>Product Name:</strong> {{ selectedProduct?.title }}</p>
+    <p><strong>Status:</strong> {{ selectedProduct?.stockStatus }}</p>
+    <p><strong>Price:</strong> {{ selectedProduct?.price | currency }}</p>
+    <p><strong>Quantity:</strong> {{ selectedProduct?.totalStockQuantity }}</p>
+  </div>
+</ng-container>
