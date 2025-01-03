@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductsService } from '../Service/Products/products.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -18,7 +19,7 @@ export class ProductsComponent {
   isViewProduct: boolean = false;
   selectedProduct: any = null;
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService,private router: Router) {}
   ngOnInit(): void {
     this.fetchproducts();
   }
@@ -152,6 +153,10 @@ export class ProductsComponent {
     console.log("add image to product is clicked")
   }
 
-  
+
+  navigateToAddProduct() {
+    console.log("here clicked")
+    this.router.navigate(['/dashboard/addproduct']); // Adjust the path as needed
+  }
   
 }

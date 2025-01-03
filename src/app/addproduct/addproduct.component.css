@@ -114,3 +114,27 @@ font-size: 12px;
 border: none;
 border-radius: 7px;
 }
+
+
+
+/* Container for the dropdowns */
+.dropdown-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 3 equal columns */
+    gap: 20px;  /* Space between the columns */
+  }
+  
+  /* Dropdown button styling */
+  .dropdown {
+    width: 100%;
+  }
+  
+  /* Label styling */
+  /* label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+   */
