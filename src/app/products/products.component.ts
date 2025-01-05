@@ -133,6 +133,9 @@ export class ProductsComponent {
       // Call your API service here to delete the product
     }
   }
+  // Static images for now
+  productImages = ['product1.jpg', 'product2.jpg', 'product3.jpg', 'product4.jpg', 'product5.jpg'];
+
   viewProductDetails(productId: number): void {
     this.isProduct = false;
     this.isViewProduct = true;
@@ -158,5 +161,52 @@ export class ProductsComponent {
     console.log("here clicked")
     this.router.navigate(['/dashboard/addproduct']); // Adjust the path as needed
   }
-  
+
+  maxImages: number = 5; // Limit to 5 images
+
+  // Open the modal
+  openUpdateImgModal(): void {
+    this.showModal = true;
+  }
+
+  // Close the modal
+  closeUpdateImgModal(): void {
+    this.showModal = false;
+  }
+
+  // Add a new image (simulated here for demo purposes)
+  addNewImage(): void {
+    if (this.productImages.length < this.maxImages) {
+      // Simulate adding a new image (e.g., uploading from the file system)
+      this.productImages.push('new-image.jpg'); // Add the new image path (from the assets folder)
+    }
+  }
+
+  // Delete an image
+  deleteImage(index: number): void {
+    this.productImages.splice(index, 1);
+  }
+
+  // Trigger the file input to open file picker
+  triggerFileInput(): void {
+    const fileInput: HTMLElement = document.getElementById('fileInput') as HTMLElement;
+    fileInput.click();
+  }
+
+  // Handle file selection
+  onFileSelect(event: any): void {
+    const file = event.target.files[0];
+    if (file && this.productImages.length < this.maxImages) {
+      const reader = new FileReader();
+      
+      reader.onload = (e: any) => {
+        // Push the image base64 string to the product images array
+        this.productImages.push(e.target.result);
+      };
+
+      // Read the selected file as a DataURL
+      reader.readAsDataURL(file);
+    }
+  }
+
 }

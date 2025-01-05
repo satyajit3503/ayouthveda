@@ -121,29 +121,141 @@
   </div>
 </div> -->
 
+
+
 <ng-container *ngIf="isViewProduct">
-  <!-- View Product Details Page -->
   <div class="container mt-3">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <div>
-        <button class="btn btn-outline-primary me-2" (click)="goBackToProducts()">
-          <i class="bi bi-arrow-left"></i>
+        <button class="btn btn-outline-primary" (click)="goBackToProducts()">
+          <i class="bi bi-arrow-left"></i> Back
         </button>
-        <h3 class="d-inline-block mb-0">Product Details</h3>
       </div>
+
+      <!-- Edit and Add Image Buttons -->
       <div>
         <button class="btn btn-outline-primary me-2" (click)="editProduct()">
           <i class="bi bi-pencil"></i> Edit
         </button>
-        <button class="btn btn-outline-success" (click)="addProductImage()">
-          <i class="bi bi-image"></i> Add Image
+        <button class="btn btn-outline-success" (click)="openUpdateImgModal()">
+          <i class="bi bi-image"></i> Update Image
         </button>
       </div>
     </div>
-    <p><strong>Product ID:</strong> {{ selectedProduct?.id }}</p>
-    <p><strong>Product Name:</strong> {{ selectedProduct?.title }}</p>
-    <p><strong>Status:</strong> {{ selectedProduct?.stockStatus }}</p>
-    <p><strong>Price:</strong> {{ selectedProduct?.price | currency }}</p>
-    <p><strong>Quantity:</strong> {{ selectedProduct?.totalStockQuantity }}</p>
+
+
+    <div class="row" style="height: 500px;">
+      <!-- Product Images Section -->
+      <div class="col-md-4" style="overflow-y: auto;">
+        <div class="product-images">
+          <!-- Check if there are any images -->
+          <div *ngIf="productImages.length === 0" class="text-center text-muted">
+            No preview image available.
+          </div>
+      
+          <!-- Display images if available -->
+          <div *ngFor="let image of productImages" class="image-container mb-3">
+            <img
+              [src]="'assets/' + image"
+              alt="Product Image"
+              class="img-fluid border rounded"
+            />
+          </div>
+        </div>
+      </div>
+      
+
+      <!-- Product Details Section -->
+      <div class="col-md-8" style="overflow-y: auto;">
+        <div *ngIf="selectedProduct?.bestseller === 1" class="badge bg-success mb-2">
+          #Bestseller
+        </div>
+        <h2 class="product-title">{{ selectedProduct?.title }}</h2>
+        <p class="text-muted">{{ selectedProduct?.shortDescription }}</p>
+        <p class="product-price">
+          <span class="current-price">{{ selectedProduct?.price | currency }}</span>
+          <span class="original-price text-muted">
+            {{ (selectedProduct?.price / (1 - selectedProduct?.discount / 100)) | currency }}
+          </span>
+          <span class="discount text-success">
+            ({{ selectedProduct?.discount }}% OFF)
+          </span>
+        </p>
+        <p><strong>Stock Status:</strong> {{ selectedProduct?.stockStatus }}</p>
+        <p><strong>Stock Quantity:</strong> {{ selectedProduct?.totalStockQuantity }}</p>
+        <p><strong>Category:</strong> {{ selectedProduct?.category }}</p>
+        <p><strong>Net Weight:</strong> {{ selectedProduct?.netWeight }}</p>
+        <p>
+          <strong>Status:</strong> 
+          <span *ngIf="selectedProduct?.status === 'Published'">
+            Published
+          </span>
+          <span *ngIf="selectedProduct?.status !== 'Published'">
+            Not Published (Scheduled for {{ selectedProduct?.publishDate }})
+          </span>
+        </p>
+        <p><strong>Description:</strong> {{ selectedProduct?.description }}</p>
+        <p><strong>Composition:</strong> {{ selectedProduct?.composition }}</p>
+        <p><strong>How to Use:</strong> {{ selectedProduct?.howToUse }}</p>
+        <p><strong>Who Can Use:</strong> {{ selectedProduct?.whoCanUse }}</p>
+        <p><strong>Special Content:</strong> {{ selectedProduct?.specialContent }}</p>
+
+        <!-- Upsell and Cross-sell Section -->
+        <div *ngIf="selectedProduct?.upsell.length > 0 || selectedProduct?.crossSell.length > 0">
+          <h4>Recommended Products</h4>
+          <ul>
+            <li *ngFor="let upsell of selectedProduct?.upsell">Upsell ID: {{ upsell }}</li>
+            <li *ngFor="let crossSell of selectedProduct?.crossSell">Cross-sell ID: {{ crossSell }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </ng-container>
+
+
+
+
+<!-- Modal for Image Update -->
+<div *ngIf="showModal" class="modal" tabindex="-1" style="display: block; transition: opacity 0.3s ease;" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Manage Product Images</h5>
+        <button type="button" class="btn-close" (click)="closeUpdateImgModal()"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Display existing images -->
+        <div *ngIf="productImages.length > 0">
+          <div class="image-container mb-3" *ngFor="let image of productImages; let i = index">
+            <img
+              [src]="'assets/' + image"
+              alt="Product Image"
+              class="img-thumbnail me-2"
+              style="width: 60px; height: 60px; object-fit: cover;"
+            />
+            <button class="btn btn-danger btn-sm" (click)="deleteImage(i)">
+              <i class="bi bi-x-circle"></i> Delete
+            </button>
+          </div>
+        </div>
+
+        <!-- No images message -->
+        <div *ngIf="productImages.length === 0" class="text-center text-muted">
+          No images available.
+        </div>
+
+        <!-- Add new image -->
+        <div *ngIf="productImages.length < 5" class="text-center mt-3">
+          <input type="file" id="fileInput" accept="image/*" (change)="onFileSelect($event)" hidden />
+          <button class="btn btn-outline-primary" (click)="triggerFileInput()">
+            <i class="bi bi-plus-circle"></i> Add Image
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeUpdateImgModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

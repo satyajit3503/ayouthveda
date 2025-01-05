@@ -3,4 +3,82 @@ a.btn-primary {
     font-size: 14px;
     font-weight: 600;
   }
+  .row {
+    display: flex;
+  }
+  
+  .col-md-4,
+  .col-md-8 {
+    max-height: 100%;
+  }
+  
+  .col-md-4 {
+    border-right: 1px solid #ddd;
+    padding-right: 15px;
+  }
+  
+  .product-images {
+    max-height: 100%;
+    overflow-y: auto;
+  }
+  
+  .col-md-8 {
+    padding-left: 15px;
+    max-height: 100%;
+    overflow-y: auto;
+  }
+  
+  .product-images img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .image-container {
+    margin-bottom: 15px;
+  }
+  
+  .product-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+  }
+  
+  .product-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: green;
+  }
+  
+  .product-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .current-price {
+    color: #28a745; /* Green for the discounted price */
+  }
+  
+  .original-price {
+    text-decoration: line-through;
+    font-size: 1rem;
+    margin-left: 5px;
+  }
+  
+  .discount {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-left: 5px;
+  }
+
+  /* Modal Overlay for Background Fade */
+.modal-overlay {
+ 
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+ 
+
+}
   
