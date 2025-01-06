@@ -23,6 +23,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WebsiteContentComponent } from './website-content/website-content.component';
 import { SellerComponent } from './seller/seller.component';
 import { LiveSearchComponent } from './live-search/live-search.component';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { LiveSearchComponent } from './live-search/live-search.component';
     InsightsComponent,
     WebsiteContentComponent,
     SellerComponent,
-    LiveSearchComponent
+    LiveSearchComponent,
+    UpdateProductComponent
   ],
   imports: [
     BrowserModule,

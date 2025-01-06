@@ -4,6 +4,7 @@
     "message": "Products retrieved successfully.",
     "serviceResponse": [
       {
+        "id": 1,
         "title": "Tulsi Green Tea",
         "description": "A calming blend of Tulsi leaves and green tea with subtle Ayurvedic benefits for a healthy mind and body.",
         "shortDescription": "Tulsi-infused green tea for immunity and stress relief.",
@@ -19,8 +20,8 @@
         "whoCanUse": "Recommended for adults and children above 12 years.",
         "composition": "Tulsi, Green Tea Leaves",
         "specialContent": "Supports stress relief and boosts immunity.",
-        "category": "Beverages",
-        "type": "Herbal Tea",
+        "category": 2,
+        "type": 1,
         "upsell": [101, 102],
         "crossSell": [201, 202],
         "bundleSell": [301, 302],
@@ -33,6 +34,7 @@
       },
       
       {
+        "id": 2,
         "title": "Herbal Face Mask",
         "description": "A rejuvenating herbal face mask for glowing skin.",
         "shortDescription": "Natural ingredients for skin care.",
@@ -48,8 +50,8 @@
         "whoCanUse": "Suitable for all skin types.",
         "composition": "Herbal extracts and essential oils.",
         "specialContent": "Cruelty-free and vegan.",
-        "category": "Skin Care",
-        "type": "Face Mask",
+        "category": 1,
+        "type": 2,
         "upsell": [103, 104],
         "crossSell": [203, 204],
         "bundleSell": [303, 304],

@@ -12,6 +12,7 @@ import { UserComponent } from './user/user.component';
 import { InsightsComponent } from './insights/insights.component';
 import { SellerComponent } from './seller/seller.component';
 import { WebsiteContentComponent } from './website-content/website-content.component';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 
 const routes: Routes = [
@@ -26,7 +27,9 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, // Default child route
       { path: 'dashboard', component: ContentComponent }, // Dashboard content
       { path: 'products', component: ProductsComponent }, // Main Products Component
-      { path: 'products/addproduct', component: AddproductComponent }, // Separate route for Add Product
+      { path: 'products/addproduct', component: AddproductComponent },
+      { path: 'products/update-product/:id', component: UpdateProductComponent },
+ // Separate route for update Product
       { path: 'insights', component: InsightsComponent },
       { path: 'user', component: UserComponent },
       { path: 'seller', component: SellerComponent },

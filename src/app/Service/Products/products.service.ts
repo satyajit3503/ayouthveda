@@ -22,6 +22,27 @@ export class ProductsService {
       const apiUrl = `${environment.apiUrl}/saveProductImageById?productId=${productId}`;
       return this.http.post<any>(apiUrl, formData);
     }
+  
+
+
+    getProductDetailById(productId: number): Observable<any> {
+      return new Observable((observer) => {
+        this.http.get<any>(this.jsonUrl).subscribe(
+          (response) => {
+            const products = response.serviceResponse || [];
+            const product = products.find((p: any) => p.id === productId);
+            if (product) {
+              observer.next(product);
+            } else {
+              observer.error(`Product with ID ${productId} not found`);
+            }
+            observer.complete();
+          },
+          (error) => {
+            observer.error(`Error fetching product data: ${error.message}`);
+          }
+        );
+      });
+    }
     
-    
-}
+    }

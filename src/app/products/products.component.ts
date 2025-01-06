@@ -149,9 +149,15 @@ export class ProductsComponent {
     this.isViewProduct = false;
     this.selectedProduct = null;
   }
-  editProduct(){
-    console.log("edit product is clicked")
+  editProduct(): void {
+    if (this.selectedProduct && this.selectedProduct.id) {
+      console.log(this.selectedProduct.id);
+      this.router.navigate(['/home/products/update-product', this.selectedProduct.id]);
+    } else {
+      console.error('Selected product is undefined or missing an ID.');
+    }
   }
+
   addProductImage(){
     console.log("add image to product is clicked")
   }
