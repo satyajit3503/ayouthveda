@@ -61,6 +61,45 @@
         "careRegimen": [603, 604],
         "bundleSellTitle": "Glow Skin Bundle",
         "bundleSellDiscount": 10.00
+      },
+      {
+        "id": 3,
+        "title": "Tulsi Green Tea",
+        "description": "A calming blend of Tulsi leaves and green tea with subtle Ayurvedic benefits for a healthy mind and body.",
+        "shortDescription": "Tulsi-infused green tea for immunity and stress relief.",
+        "price": 299.00,
+        "discount": 15,
+        "totalStockQuantity": 120,
+        "netWeight": "250g",
+        "stockStatus": "In Stock",
+        "status": "Published",
+        "publishDate": "2024-01-10",
+        "bestseller": 1,
+        "howToUse": "Steep 1 teaspoon in hot water for 3-5 minutes. Strain and serve.",
+        "whoCanUse": "Recommended for adults and children above 12 years.",
+        "composition": "Tulsi, Green Tea Leaves",
+        "specialContent": "Supports stress relief and boosts immunity.",
+        "category":"face",
+        "type": "face cream",
+        "upsell": ["Aloe Vera Gel", "Charcoal Face Wash"],
+        "crossSell": ["Ultra Hydrating Face Emulsion Cream ", "Acne Enemy Face Wash"],
+        "bundleSell": ["Sparkling Gold Face Wash", "Pearly White Face Wash"],
+        "Collections": ["Acne", "Hemp"],
+        "ingredients": ["Mangosteen", "Coconut"],
+        "concerns": ["Oral Care", "Oily Skin"],
+        "careRegimen": ["Ageing skin", "Skin Detox Regime"],
+        "bundleSellTitle": "Ayurvedic Tea Combo",
+        "bundleSellDiscount":"10.00",
+	"benifits":["Promotes skin even tone","Relieves from sunburn & itching"],
+	"keyIngredients":[
+	{"keyIngredientsName": "Aloe Vera", "description": "Aloe Vera contains vitamins A, C, and E, which are essential for healthy skin. It has cooling effect on the skin that helps to reduce redness and inflammation. Additionally, it protects the skin from sun damage and is an excellent natural moisturizer that helps to keep the skin hydrated."},
+	{
+	 "keyIngredientsName": "Neem",
+         "description": "Neem is known as a natural skin healer that effectively battles skin damage and promotes clear, healthy skin and hair. It contains essential skin purifying bio-compounds that help to prevent and treat acne and other skin conditions. Additionally, it has anti-inflammatory properties that soothe the skin and promote healthy cell turnover."
+	}
+	],
+	"bannerImgpath1": "imagepath1",
+        "bannerImgpath2": "imagepath2"
       }
     ]
   }

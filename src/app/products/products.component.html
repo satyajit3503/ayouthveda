@@ -146,14 +146,14 @@
 
     <div class="row" style="height: 500px;">
       <!-- Product Images Section -->
-      <div class="col-md-4" style="overflow-y: auto;">
+      <!-- <div class="col-md-4" style="overflow-y: auto;">
         <div class="product-images">
-          <!-- Check if there are any images -->
+          
           <div *ngIf="productImages.length === 0" class="text-center text-muted">
             No preview image available.
           </div>
       
-          <!-- Display images if available -->
+      
           <div *ngFor="let image of productImages" class="image-container mb-3">
             <img
               [src]="'assets/' + image"
@@ -162,100 +162,147 @@
             />
           </div>
         </div>
-      </div>
+      </div> -->
       
-
-      <!-- Product Details Section -->
-      <div class="col-md-8" style="overflow-y: auto;">
-        <div *ngIf="selectedProduct?.bestseller === 1" class="badge bg-success mb-2">
-          #Bestseller
-        </div>
-        <h2 class="product-title">{{ selectedProduct?.title }}</h2>
-        <p class="text-muted">{{ selectedProduct?.shortDescription }}</p>
-        <p class="product-price">
-          <span class="current-price">{{ selectedProduct?.price | currency }}</span>
-          <span class="original-price text-muted">
-            {{ (selectedProduct?.price / (1 - selectedProduct?.discount / 100)) | currency }}
-          </span>
-          <span class="discount text-success">
-            ({{ selectedProduct?.discount }}% OFF)
-          </span>
-        </p>
-        <p><strong>Stock Status:</strong> {{ selectedProduct?.stockStatus }}</p>
-        <p><strong>Stock Quantity:</strong> {{ selectedProduct?.totalStockQuantity }}</p>
-        <p><strong>Category:</strong> {{ selectedProduct?.category }}</p>
-        <p><strong>Net Weight:</strong> {{ selectedProduct?.netWeight }}</p>
-        <p>
-          <strong>Status:</strong> 
-          <span *ngIf="selectedProduct?.status === 'Published'">
-            Published
-          </span>
-          <span *ngIf="selectedProduct?.status !== 'Published'">
-            Not Published (Scheduled for {{ selectedProduct?.publishDate }})
-          </span>
-        </p>
-        <p><strong>Description:</strong> {{ selectedProduct?.description }}</p>
-        <p><strong>Composition:</strong> {{ selectedProduct?.composition }}</p>
-        <p><strong>How to Use:</strong> {{ selectedProduct?.howToUse }}</p>
-        <p><strong>Who Can Use:</strong> {{ selectedProduct?.whoCanUse }}</p>
-        <p><strong>Special Content:</strong> {{ selectedProduct?.specialContent }}</p>
-
-        <!-- Upsell and Cross-sell Section -->
-        <div *ngIf="selectedProduct?.upsell.length > 0 || selectedProduct?.crossSell.length > 0">
-          <h4>Recommended Products</h4>
-          <ul>
-            <li *ngFor="let upsell of selectedProduct?.upsell">Upsell ID: {{ upsell }}</li>
-            <li *ngFor="let crossSell of selectedProduct?.crossSell">Cross-sell ID: {{ crossSell }}</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-container>
-
-
-
-
-<!-- Modal for Image Update -->
-<div *ngIf="showModal" class="modal" tabindex="-1" style="display: block; transition: opacity 0.3s ease;" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Manage Product Images</h5>
-        <button type="button" class="btn-close" (click)="closeUpdateImgModal()"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Display existing images -->
-        <div *ngIf="productImages.length > 0">
-          <div class="image-container mb-3" *ngFor="let image of productImages; let i = index">
-            <img
-              [src]="'assets/' + image"
-              alt="Product Image"
-              class="img-thumbnail me-2"
-              style="width: 60px; height: 60px; object-fit: cover;"
-            />
-            <button class="btn btn-danger btn-sm" (click)="deleteImage(i)">
-              <i class="bi bi-x-circle"></i> Delete
-            </button>
+      <div class="container mt-4">
+        <!-- Product Details Section -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Product Details: {{ selectedProduct?.title }}</h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <!-- Left Column: Product Overview -->
+              <div class="col-md-6">
+                <h5>Basic Information</h5>
+                <ul class="list-unstyled">
+                  <li><strong>Title:</strong> {{ selectedProduct?.title }}</li>
+                  <li><strong>Short Description:</strong> {{ selectedProduct?.shortDescription }}</li>
+                  <li><strong>Price:</strong> {{ selectedProduct?.price | currency }}</li>
+                  <li><strong>Discount:</strong> {{ selectedProduct?.discount }}% OFF</li>
+                  <li><strong>Actual Price:</strong> 
+                    {{ (selectedProduct?.price / (1 - selectedProduct?.discount / 100)) | currency }}
+                  </li>
+                  <li><strong>Category:</strong> {{ selectedProduct?.category }}</li>
+                  <li><strong>Type:</strong> {{ selectedProduct?.type }}</li>
+                  <li><strong>Stock Status:</strong> {{ selectedProduct?.stockStatus }}</li>
+                  <li><strong>Total Stock Quantity:</strong> {{ selectedProduct?.totalStockQuantity }}</li>
+                  <li><strong>Net Weight:</strong> {{ selectedProduct?.netWeight }}</li>
+                  <li><strong>Status:</strong> 
+                    <span *ngIf="selectedProduct?.status === 'Published'" class="text-success">
+                      Published
+                    </span>
+                    <span *ngIf="selectedProduct?.status !== 'Published'" class="text-warning">
+                      Not Published (Scheduled for {{ selectedProduct?.publishDate }})
+                    </span>
+                  </li>
+                </ul>
+              </div>
+      
+              <!-- Right Column: Additional Details -->
+              <div class="col-md-6">
+                <h5>Additional Information</h5>
+                <ul class="list-unstyled">
+                  <li><strong>Description:</strong> {{ selectedProduct?.description }}</li>
+                  <li><strong>Composition:</strong> {{ selectedProduct?.composition }}</li>
+                  <li><strong>How to Use:</strong> {{ selectedProduct?.howToUse }}</li>
+                  <li><strong>Who Can Use:</strong> {{ selectedProduct?.whoCanUse }}</li>
+                  <li><strong>Special Content:</strong> {{ selectedProduct?.specialContent }}</li>
+                </ul>
+      
+                <!-- Bestseller Badge -->
+                <div *ngIf="selectedProduct?.bestseller === 1" class="badge bg-success mt-2">
+                  Bestseller Product
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- No images message -->
-        <div *ngIf="productImages.length === 0" class="text-center text-muted">
-          No images available.
+           <!-- Key Ingredients and Benefits -->
+           <div class="card shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+              <h4 class="mb-0">Key Ingredients & Benefits</h4>
+            </div>
+            <div class="card-body">
+              <h6>Key Ingredients</h6>
+              <ul>
+                <li *ngFor="let ingredient of selectedProduct?.keyIngredients">
+                  <strong>{{ ingredient.keyIngredientsName }}:</strong> {{ ingredient.description }}
+                </li>
+              </ul>
+        
+              <h6>Benefits</h6>
+              <ul>
+                <li *ngFor="let benefit of selectedProduct?.benifits">{{ benefit }}</li>
+              </ul>
+            </div>
+          </div>
+      
+        <!-- Upsell, Cross-sell, and Bundles Section -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0">Related Products</h4>
+          </div>
+          <div class="card-body">
+            <div *ngIf="selectedProduct?.upsell?.length > 0">
+              <h6>Upsell Products</h6>
+              <ul>
+                <li *ngFor="let upsell of selectedProduct?.upsell">{{ upsell }}</li>
+              </ul>
+            </div>
+            <div *ngIf="selectedProduct?.crossSell?.length > 0">
+              <h6>Cross-sell Products</h6>
+              <ul>
+                <li *ngFor="let crossSell of selectedProduct?.crossSell">{{ crossSell }}</li>
+              </ul>
+            </div>
+            <div *ngIf="selectedProduct?.bundleSell?.length > 0">
+              <h6>Bundle Products</h6>
+              <ul>
+                <li *ngFor="let bundle of selectedProduct?.bundleSell">{{ bundle }}</li>
+              </ul>
+            </div>
+          </div>
         </div>
-
-        <!-- Add new image -->
-        <div *ngIf="productImages.length < 5" class="text-center mt-3">
-          <input type="file" id="fileInput" accept="image/*" (change)="onFileSelect($event)" hidden />
-          <button class="btn btn-outline-primary" (click)="triggerFileInput()">
-            <i class="bi bi-plus-circle"></i> Add Image
-          </button>
+      
+        <!-- Images Section -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-info text-white">
+            <h4 class="mb-0">Manage Product Images</h4>
+          </div>
+          <div class="card-body text-center">
+            <div *ngIf="productImages.length > 0; else noImages">
+              <div class="d-flex justify-content-center flex-wrap">
+                <div class="position-relative me-3 mb-3" *ngFor="let image of productImages; let i = index">
+                  <!-- Image Thumbnail -->
+                  <img
+                    [src]="'assets/' + image"
+                    alt="Product Image"
+                    class="img-thumbnail"
+                    style="width: 100px; height: 100px; object-fit: cover;"
+                  />
+                  <!-- Delete Icon -->
+                  <button
+                    class="btn btn-danger btn-sm position-absolute"
+                    style="top: 5px; right: 5px; padding: 4px; border-radius: 50%;"
+                    (click)="deleteImage(i)"
+                  >
+                    <i class="bi bi-x-circle"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <ng-template #noImages>
+              <p class="text-muted">No images available.</p>
+            </ng-template>
+        
+            <button class="btn btn-outline-primary mt-3" (click)="triggerFileInput()">
+              <i class="bi bi-plus-circle"></i> Add Image
+            </button>
+            <input type="file" id="fileInput" accept="image/*" (change)="onFileSelect($event)" hidden />
+          </div>
         </div>
+        
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeUpdateImgModal()">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+      

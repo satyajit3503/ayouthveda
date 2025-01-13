@@ -168,7 +168,7 @@ export class ProductsComponent {
     this.router.navigate(['/dashboard/addproduct']); // Adjust the path as needed
   }
 
-  maxImages: number = 5; // Limit to 5 images
+  maxImages: number = 20; // Limit to 20 images
 
   // Open the modal
   openUpdateImgModal(): void {
@@ -212,6 +212,9 @@ export class ProductsComponent {
 
       // Read the selected file as a DataURL
       reader.readAsDataURL(file);
+    }
+    else{
+      alert("maximum image upload reached")
     }
   }
 
