@@ -14,33 +14,35 @@ export class UpdateProductComponent implements OnInit {
   
   categories: any[] = [
     { id: 1, name: "Skin Care" },
-    { id: 2, name: "Beverages" }
+    { id: 2, name: "Beverages" },
+    { id: 4, name: "face" }
   ];
   
   types: any[] = [
     { id: 1, typeName: "Herbal Tea" },
-    { id: 2, typeName: "Face Mask" }
+    { id: 2, typeName: "Face Mask" },
+    { id: 4, typeName: "face cream" }
   ];
   
   ingredient = [
-    { id: '1', ingredientName: 'Ingredient 1' },
-    { id: '2', ingredientName: 'Ingredient 2' },
+    { id: '1', ingredientName: 'Mangosteen' },
+    { id: '2', ingredientName: 'Coconut' },
     { id: '3', ingredientName: 'Ingredient 3' }
   ];
 
   concern = [
-    { id: '1', concernName: 'Concern 1' },
-    { id: '2', concernName: 'Concern 2' }
+    { id: '1', concernName: 'Oral Care' },
+    { id: '2', concernName: 'Oily Skin' }
   ];
 
   careRegimen = [
-    { id: '1', careRegimenName: 'Regimen 1' },
-    { id: '2', careRegimenName: 'Regimen 2' }
+    { id: '1', careRegimenName: 'Ageing skin' },
+    { id: '2', careRegimenName: 'Skin Detox Regime' }
   ];
 
   collections = [
-    { id: '1', collectionName: 'Collection 1' },
-    { id: '2', collectionName: 'Collection 2' }
+    { id: '1', collectionName: 'Acne' },
+    { id: '2', collectionName: 'Hemp' }
   ];
   upsellItems = [
     { id: 1, name: 'Up Sell 1' },
@@ -108,18 +110,20 @@ export class UpdateProductComponent implements OnInit {
     //   this.productData.category = '';
     // }
   }
-  toggleSelection(event: any, list: any[], id: any): void {
-    if (event.target.checked) {
-      if (!list.includes(id)) {
-        list.push(id);
+  toggleSelection(event: Event, list: any[], value: any): void {
+    const checkbox = event.target as HTMLInputElement;
+    if (checkbox.checked) {
+      if (!list.includes(value)) {
+        list.push(value);
       }
     } else {
-      const index = list.indexOf(id);
+      const index = list.indexOf(value);
       if (index > -1) {
         list.splice(index, 1);
       }
     }
   }
+  
   
   onCancel(){
     // this.router.navigate(['/products']);

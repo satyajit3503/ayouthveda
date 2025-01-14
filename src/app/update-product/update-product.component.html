@@ -31,30 +31,32 @@
   
       <div class="row">
         <!-- Category Field -->
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="categories" class="form-label mb-0">Category:<span style="color: red;">*</span></label>
-            <select id="categories" name="category" class="form-select" [(ngModel)]="productData.category" (change)="onCategoryChange()">
-              <option value="" disabled selected>Select a category</option>
-              <option *ngFor="let category of categories" [value]="category.id">
-                {{ category.name }}
-              </option>
-            </select>
-          </div>
-        </div>
-      
-        <!-- Type Field -->
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="types" class="form-label mb-0">Type:<span style="color: red;">*</span></label>
-            <select id="types" name="type" class="form-select" [(ngModel)]="productData.type">
-              <option value="" disabled selected>Select a type</option>
-              <option *ngFor="let type of types" [value]="type.id">
-                {{ type.typeName }}
-              </option>
-            </select>
-          </div>
-        </div>
+        <!-- Category Field -->
+<div class="col-md-6">
+  <div class="form-group">
+    <label for="categories" class="form-label mb-0">Category:<span style="color: red;">*</span></label>
+    <select id="categories" name="category" class="form-select" [(ngModel)]="productData.category" (change)="onCategoryChange()">
+      <option value="" disabled selected>Select a category</option>
+      <option *ngFor="let category of categories" [value]="category.name">
+        {{ category.name }}
+      </option>
+    </select>
+  </div>
+</div>
+
+<!-- Type Field -->
+<div class="col-md-6">
+  <div class="form-group">
+    <label for="types" class="form-label mb-0">Type:<span style="color: red;">*</span></label>
+    <select id="types" name="type" class="form-select" [(ngModel)]="productData.type">
+      <option value="" disabled selected>Select a type</option>
+      <option *ngFor="let type of types" [value]="type.typeName">
+        {{ type.typeName }}
+      </option>
+    </select>
+  </div>
+</div>
+
       </div>
       <div class="row">
         <!-- Price Field -->
@@ -133,8 +135,8 @@
               name="status" 
               class="form-control"
             >
-              <option value="published">Published</option>
-              <option value="scheduled">Scheduled</option>
+              <option value="Published">Published</option>
+              <option value="Scheduled">Scheduled</option>
             </select>
           </div>
         </div>
@@ -182,14 +184,17 @@
               <ul class="dropdown-menu" aria-labelledby="ingredientsDropdown">
                 <li *ngFor="let ingredient of ingredient">
                   <label class="dropdown-item">
-                    <input type="checkbox" [value]="ingredient.id"
-                      (change)="toggleSelection($event, productData.ingredients, ingredient.id)" />
+                    <input 
+                      type="checkbox" 
+                      [checked]="productData.ingredients.includes(ingredient.ingredientName)" 
+                      (change)="toggleSelection($event, productData.ingredients, ingredient.ingredientName)" />
                     {{ ingredient.ingredientName }}
                   </label>
                 </li>
               </ul>
             </div>
           </div>
+          
       
           <div class="col-6">
             <!-- Concerns -->
@@ -202,12 +207,15 @@
               <ul class="dropdown-menu" aria-labelledby="concernsDropdown">
                 <li *ngFor="let concern of concern">
                   <label class="dropdown-item">
-                    <input type="checkbox" [value]="concern.id"
-                      (change)="toggleSelection($event, productData.concerns, concern.id)" />
+                    <input 
+                      type="checkbox" 
+                      [checked]="productData.concerns.includes(concern.concernName)" 
+                      (change)="toggleSelection($event, productData.concerns, concern.concernName)" />
                     {{ concern.concernName }}
                   </label>
                 </li>
               </ul>
+              
             </div>
           </div>
         </div>
@@ -219,18 +227,21 @@
             <label for="careRegimenDropdown">Care Regimens:<span style="color: red;">*</span></label>
             <div class="dropdown mb-3 form-group">
               <button class="btn btn-light rounded-0 dropdown-toggle" type="button" id="careRegimenDropdown"
-                data-bs-toggle="dropdown" aria-expanded="false">
+                data-bs-toggle="dropdown" aria-expanded="true">
                 Select Care Regimens
               </button>
               <ul class="dropdown-menu" aria-labelledby="careRegimenDropdown">
                 <li *ngFor="let regimen of careRegimen">
                   <label class="dropdown-item">
-                    <input type="checkbox" [value]="regimen.id"
-                      (change)="toggleSelection($event, productData.careRegimen, regimen.id)" />
+                    <input 
+                      type="checkbox" 
+                      [checked]="productData.careRegimen.includes(regimen.careRegimenName)" 
+                      (change)="toggleSelection($event, productData.careRegimen, regimen.careRegimenName)" />
                     {{ regimen.careRegimenName }}
                   </label>
                 </li>
               </ul>
+              
             </div>
           </div>
       
@@ -245,12 +256,15 @@
               <ul class="dropdown-menu" aria-labelledby="collectionsDropdown">
                 <li *ngFor="let collection of collections">
                   <label class="dropdown-item">
-                    <input type="checkbox" [value]="collection.id"
-                      (change)="toggleSelection($event, productData.Collections, collection.id)" />
+                    <input 
+                      type="checkbox" 
+                      [checked]="productData.Collections.includes(collection.collectionName)" 
+                      (change)="toggleSelection($event, productData.Collections, collection.collectionName)" />
                     {{ collection.collectionName }}
                   </label>
                 </li>
               </ul>
+              
             </div>
           </div>
         </div>

@@ -167,7 +167,7 @@
       <div class="container mt-4">
         <!-- Product Details Section -->
         <div class="card shadow-sm mb-4">
-          <div class="card-header bg-primary text-white">
+          <div class="card-header  text-white" style="background-color: #4a90e2;">
             <h3 class="mb-0">Product Details: {{ selectedProduct?.title }}</h3>
           </div>
           <div class="card-body">
@@ -176,18 +176,35 @@
               <div class="col-md-6">
                 <h5>Basic Information</h5>
                 <ul class="list-unstyled">
+                   <!-- Bestseller Badge -->
+                
                   <li><strong>Title:</strong> {{ selectedProduct?.title }}</li>
                   <li><strong>Short Description:</strong> {{ selectedProduct?.shortDescription }}</li>
                   <li><strong>Price:</strong> {{ selectedProduct?.price | currency }}</li>
                   <li><strong>Discount:</strong> {{ selectedProduct?.discount }}% OFF</li>
-                  <li><strong>Actual Price:</strong> 
-                    {{ (selectedProduct?.price / (1 - selectedProduct?.discount / 100)) | currency }}
-                  </li>
                   <li><strong>Category:</strong> {{ selectedProduct?.category }}</li>
                   <li><strong>Type:</strong> {{ selectedProduct?.type }}</li>
                   <li><strong>Stock Status:</strong> {{ selectedProduct?.stockStatus }}</li>
                   <li><strong>Total Stock Quantity:</strong> {{ selectedProduct?.totalStockQuantity }}</li>
                   <li><strong>Net Weight:</strong> {{ selectedProduct?.netWeight }}</li>
+                  <li><strong>Bundle sale title:</strong> {{ selectedProduct?.bundleSellTitle }}</li>
+                  <li><strong>Bundle sale Discount:</strong> {{ selectedProduct?.bundleSellDiscount }}% OFF</li>
+                
+                </ul>
+              </div>
+      
+              <!-- Right Column: Additional Details -->
+              <div class="col-md-6">
+                <h5>Additional Information</h5>
+                <ul class="list-unstyled">
+                  <div *ngIf="selectedProduct?.bestseller === 1" class="badge bg-success mt-2">
+                    Bestseller Product
+                  </div>
+                  <li><strong>Description:</strong> {{ selectedProduct?.description }}</li>
+                  <li><strong>Composition:</strong> {{ selectedProduct?.composition }}</li>
+                  <li><strong>How to Use:</strong> {{ selectedProduct?.howToUse }}</li>
+                  <li><strong>Who Can Use:</strong> {{ selectedProduct?.whoCanUse }}</li>
+                  <li><strong>Special Content:</strong> {{ selectedProduct?.specialContent }}</li>
                   <li><strong>Status:</strong> 
                     <span *ngIf="selectedProduct?.status === 'Published'" class="text-success">
                       Published
@@ -197,31 +214,50 @@
                     </span>
                   </li>
                 </ul>
-              </div>
       
-              <!-- Right Column: Additional Details -->
-              <div class="col-md-6">
-                <h5>Additional Information</h5>
-                <ul class="list-unstyled">
-                  <li><strong>Description:</strong> {{ selectedProduct?.description }}</li>
-                  <li><strong>Composition:</strong> {{ selectedProduct?.composition }}</li>
-                  <li><strong>How to Use:</strong> {{ selectedProduct?.howToUse }}</li>
-                  <li><strong>Who Can Use:</strong> {{ selectedProduct?.whoCanUse }}</li>
-                  <li><strong>Special Content:</strong> {{ selectedProduct?.specialContent }}</li>
-                </ul>
-      
-                <!-- Bestseller Badge -->
-                <div *ngIf="selectedProduct?.bestseller === 1" class="badge bg-success mt-2">
-                  Bestseller Product
-                </div>
+               
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Related Information Section -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header text-white" style="background-color: #4a90e2;">
+      <h4 class="mb-0">Related Information</h4>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <h6>Collections</h6>
+          <ul>
+            <li *ngFor="let collection of selectedProduct?.Collections">{{ collection }}</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6>Ingredients</h6>
+          <ul>
+            <li *ngFor="let ingredient of selectedProduct?.ingredients">{{ ingredient }}</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6>Concerns</h6>
+          <ul>
+            <li *ngFor="let concern of selectedProduct?.concerns">{{ concern }}</li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6>Care Regimen</h6>
+          <ul>
+            <li *ngFor="let regimen of selectedProduct?.careRegimen">{{ regimen }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
            <!-- Key Ingredients and Benefits -->
            <div class="card shadow-sm mb-4">
-            <div class="card-header bg-success text-white">
+            <div class="card-header  text-white" style="background-color: #4a90e2;">
               <h4 class="mb-0">Key Ingredients & Benefits</h4>
             </div>
             <div class="card-body">
@@ -241,7 +277,7 @@
       
         <!-- Upsell, Cross-sell, and Bundles Section -->
         <div class="card shadow-sm mb-4">
-          <div class="card-header bg-secondary text-white">
+          <div class="card-header  text-white"  style="background-color: #4a90e2;">
             <h4 class="mb-0">Related Products</h4>
           </div>
           <div class="card-body">
@@ -267,42 +303,76 @@
         </div>
       
         <!-- Images Section -->
-        <div class="card shadow-sm mb-4">
-          <div class="card-header bg-info text-white">
-            <h4 class="mb-0">Manage Product Images</h4>
-          </div>
-          <div class="card-body text-center">
-            <div *ngIf="productImages.length > 0; else noImages">
-              <div class="d-flex justify-content-center flex-wrap">
-                <div class="position-relative me-3 mb-3" *ngFor="let image of productImages; let i = index">
-                  <!-- Image Thumbnail -->
-                  <img
-                    [src]="'assets/' + image"
-                    alt="Product Image"
-                    class="img-thumbnail"
-                    style="width: 100px; height: 100px; object-fit: cover;"
-                  />
-                  <!-- Delete Icon -->
-                  <button
-                    class="btn btn-danger btn-sm position-absolute"
-                    style="top: 5px; right: 5px; padding: 4px; border-radius: 50%;"
-                    (click)="deleteImage(i)"
-                  >
-                    <i class="bi bi-x-circle"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <ng-template #noImages>
-              <p class="text-muted">No images available.</p>
-            </ng-template>
-        
-            <button class="btn btn-outline-primary mt-3" (click)="triggerFileInput()">
-              <i class="bi bi-plus-circle"></i> Add Image
-            </button>
-            <input type="file" id="fileInput" accept="image/*" (change)="onFileSelect($event)" hidden />
-          </div>
+        <!-- Images Section -->
+<div class="card shadow-sm mb-4">
+  <div class="card-header text-white" style="background-color: #4a90e2;">
+    <h4 class="mb-0">Manage Product Images</h4>
+  </div>
+  <div class="card-body text-center">
+    <!-- Banner Image Section -->
+    <div *ngIf="selectedProduct?.bannerImgpath1 || selectedProduct?.bannerImgpath2">
+      <div class="mb-3">
+        <h5 class="text-muted">Product Banners image</h5>
+      </div>
+      <div class="d-flex justify-content-center flex-wrap">
+        <!-- Banner Image 1 -->
+        <div class="position-relative me-3 mb-3" *ngIf="selectedProduct?.bannerImgpath1">
+          <img
+            [src]="selectedProduct?.bannerImgpath1"
+            alt="Banner Image 1"
+            class="img-thumbnail"
+            style="width: 150px; height: 150px; object-fit: cover;"
+          />
         </div>
+        <!-- Banner Image 2 -->
+        <div class="position-relative mb-3" *ngIf="selectedProduct?.bannerImgpath2">
+          <img
+            [src]="selectedProduct?.bannerImgpath2"
+            alt="Banner Image 2"
+            class="img-thumbnail"
+            style="width: 150px; height: 150px; object-fit: cover;"
+          />
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!selectedProduct?.bannerImgpath1 && !selectedProduct?.bannerImgpath2" class="text-muted">
+      <p>No banners available.</p>
+    </div>
+
+    <!-- Product Images Section -->
+    <div *ngIf="productImages.length > 0; else noImages">
+      <h5 class="text-muted">Product image</h5>
+      <div class="d-flex justify-content-center flex-wrap">
+        <div class="position-relative me-3 mb-3" *ngFor="let image of productImages; let i = index">
+          <!-- Image Thumbnail -->
+          <img
+            [src]="'assets/' + image"
+            alt="Product Image"
+            class="img-thumbnail"
+            style="width: 100px; height: 100px; object-fit: cover;"
+          />
+          <!-- Delete Icon -->
+          <button
+            class="btn btn-danger btn-sm position-absolute"
+            style="top: 5px; right: 5px; padding: 4px; border-radius: 50%;"
+            (click)="deleteImage(i)"
+          >
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <ng-template #noImages>
+      <p class="text-muted">No images available.</p>
+    </ng-template>
+
+    <button class="btn btn-outline-primary mt-3" (click)="triggerFileInput()">
+      <i class="bi bi-plus-circle"></i> Add Image
+    </button>
+    <input type="file" id="fileInput" accept="image/*" (change)="onFileSelect($event)" hidden />
+  </div>
+</div>
+
         
       </div>
       
