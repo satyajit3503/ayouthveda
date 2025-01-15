@@ -46,16 +46,20 @@ export class UpdateProductComponent implements OnInit {
   ];
   upsellItems = [
     { id: 1, name: 'Up Sell 1' },
+    { id: 3, name: 'Aloe Vera Gel' },
+    { id: 4, name: 'Charcoal Face Wash' },
     { id: 2, name: 'Up Sell 2' }
   ];
   
   crossSellItems = [
     { id: 1, name: 'Cross Sell 1' },
-    { id: 2, name: 'Cross Sell 2' }
+    { id: 3, name: 'Acne Enemy Face Wash' },
+    { id: 2, name: 'Ultra Hydrating Face Emulsion Cream' }
   ];
   
   bundleSellItems = [
-    { id: 1, name: 'Bundle Sell 1' },
+    { id: 1, name: 'Sparkling Gold Face Wash' },
+    { id: 3, name: 'Pearly White Face Wash' },
     { id: 2, name: 'Bundle Sell 2' }
   ];
 

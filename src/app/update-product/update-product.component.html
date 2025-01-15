@@ -329,8 +329,12 @@
               <ul class="dropdown-menu w-100" aria-labelledby="upsellsDropdown">
                 <li *ngFor="let upsell of upsellItems">
                   <label class="dropdown-item">
-                    <input type="checkbox" [value]="upsell.id"
-                      (change)="toggleSelection($event, productData.upsell, upsell.id)" />
+                    <input 
+                      type="checkbox" 
+                      [value]="upsell.name" 
+                      [checked]="productData.upsell.includes(upsell.name)" 
+                      (change)="toggleSelection($event, productData.upsell, upsell.name)" 
+                    />
                     {{ upsell.name }}
                   </label>
                 </li>
@@ -349,8 +353,12 @@
               <ul class="dropdown-menu w-100" aria-labelledby="crossSellsDropdown">
                 <li *ngFor="let crossSell of crossSellItems">
                   <label class="dropdown-item">
-                    <input type="checkbox" [value]="crossSell.id"
-                      (change)="toggleSelection($event, productData.crossSell, crossSell.id)" />
+                    <input 
+                      type="checkbox" 
+                      [value]="crossSell.name" 
+                      [checked]="productData.crossSell.includes(crossSell.name)" 
+                      (change)="toggleSelection($event, productData.crossSell, crossSell.name)" 
+                    />
                     {{ crossSell.name }}
                   </label>
                 </li>
@@ -359,7 +367,7 @@
           </div>
       
           <!-- Bundle Sells Dropdown -->
-           <div class="col-md-4">
+          <div class="col-md-4">
             <label for="bundleSellsDropdown">Bundle Sells:</label>
             <div class="dropdown mb-3">
               <button class="btn btn-light rounded-0 dropdown-toggle w-100" type="button"
@@ -369,17 +377,21 @@
               <ul class="dropdown-menu w-100" aria-labelledby="bundleSellsDropdown">
                 <li *ngFor="let bundleSell of bundleSellItems">
                   <label class="dropdown-item">
-                    <input type="checkbox" [value]="bundleSell.id"
-                      
-                       />
+                    <input 
+                      type="checkbox" 
+                      [value]="bundleSell.name" 
+                      [checked]="productData.bundleSell.includes(bundleSell.name)" 
+                      (change)="toggleSelection($event, productData.bundleSell, bundleSell.name)" 
+                    />
                     {{ bundleSell.name }}
                   </label>
                 </li>
               </ul>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
+      
       
   
   

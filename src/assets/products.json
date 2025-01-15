@@ -82,7 +82,7 @@
         "category":"face",
         "type": "face cream",
         "upsell": ["Aloe Vera Gel", "Charcoal Face Wash"],
-        "crossSell": ["Ultra Hydrating Face Emulsion Cream ", "Acne Enemy Face Wash"],
+        "crossSell": ["Ultra Hydrating Face Emulsion Cream", "Acne Enemy Face Wash"],
         "bundleSell": ["Sparkling Gold Face Wash", "Pearly White Face Wash"],
         "Collections": ["Acne", "Hemp"],
         "ingredients": ["Mangosteen", "Coconut"],

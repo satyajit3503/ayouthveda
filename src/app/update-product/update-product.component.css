@@ -114,3 +114,28 @@ font-size: 12px;
 border: none;
 border-radius: 7px;
 }
+
+/* Dropdown items */
+.dropdown-menu {
+    max-width: 100%; /* Ensures the dropdown doesn't exceed the container's width */
+    word-wrap: break-word; /* Break long words into the next line */
+    white-space: normal; /* Allow text to wrap within the dropdown */
+}
+
+/* Ensure dropdown buttons adjust for long text */
+.dropdown-item {
+    display: block;
+    width: 100%;
+    overflow-wrap: break-word; /* Break long words */
+    white-space: normal; /* Wrap text instead of keeping it in one line */
+}
+
+/* Dropdown toggle button */
+.dropdown-toggle {
+    text-align: left; /* Ensure text aligns properly */
+    white-space: nowrap; /* Prevent text from wrapping on the button */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Show ellipsis (...) for overflowing text */
+    display: inline-block;
+    width: 100%;
+}
