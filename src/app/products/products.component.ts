@@ -18,6 +18,12 @@ export class ProductsComponent {
   isProduct: boolean = true;
   isViewProduct: boolean = false;
   selectedProduct: any = null;
+  
+  showEditModal = false;
+  modalData: any = {
+    type: '',
+    items: []
+  };
 
   constructor(private productsService: ProductsService,private router: Router) {}
   ngOnInit(): void {
@@ -218,4 +224,48 @@ export class ProductsComponent {
     }
   }
 
+ openEditModal(type: string): void {
+  this.showEditModal=true;
+    // Initialize modal data based on the type
+    this.modalData = {
+      type: type,
+      items: type === 'keyIngredients'
+        ? [...this.selectedProduct?.keyIngredients] // Clone key ingredients
+        : [...this.selectedProduct?.benifits] // Clone benefits
+    };
+   
+  }
+
+  deleteRow(index: number) {
+    this.modalData.items.splice(index, 1);
+  }
+  
+  addNewRow() {
+    if (this.modalData.type === 'keyIngredients') {
+      this.modalData.items.push({ name: '', description: '' });
+    } else if (this.modalData.type === 'benefits') {
+      this.modalData.items.push('');
+    }
+  }
+  
+  submitModalData() {
+      // Logic to save the modal data
+      console.log('Modal Data:', this.modalData);
+      this.closeEditModal();
+    }
+    closeEditModal(): void {
+      this.showEditModal = false;
+      
+    }
+
+    onImageUpload(event: any, index: number) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.modalData.items[index].image = reader.result as string;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
 }
